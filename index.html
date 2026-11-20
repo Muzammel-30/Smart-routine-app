@@ -4,12 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#156b49" />
-  <meta name="description" content="আজকের রুটিন ও আমল, মাসিক অগ্রগতি, নামাজের সময়, তসবিহ ও প্রোফাইল।" />
+  <meta name="description" content="Home রুটিন ও আমল, টিক চিহ্ন চেকবক্স, অগ্রগতি, তাপমাত্রা ও সেটিংস।" />
   <title>স্মার্ট রুটিন ও অগ্রগতি</title>
   <link rel="manifest" id="manifest-placeholder" />
-  <link rel="icon" type="image/png" href="Islamic%20Daily%20Routine%20and%20Deeds%20Icon.png">
-  <link rel="apple-touch-icon" href="Islamic%20Daily%20Routine%20and%20Deeds%20Icon.png">
   <style>
+    :root {
       --bg: #f6f7f2;
       --card: #ffffff;
       --green: #156b49;
@@ -17,9 +16,8 @@
       --green-soft: #e6f3ec;
       --text: #1c2421;
       --muted: #64706a;
-      --border: #e3e7e2;
+      --border: #dfe5e0;
       --danger: #dc2626;
-      --accent: #eab308;
       --input-bg: #ffffff;
     }
 
@@ -33,7 +31,6 @@
       --muted: #9fb0a8;
       --border: #253b32;
       --danger: #f87171;
-      --accent: #facc15;
       --input-bg: #101b17;
     }
 
@@ -56,7 +53,6 @@
       margin: 0 auto;
     }
 
-    /* Top Green Hero Card like Image 1 */
     .hero-card {
       background: linear-gradient(155deg, #1b7d56, #11573b);
       color: #ffffff;
@@ -74,26 +70,43 @@
       margin-bottom: 14px;
     }
 
-    .hero-day { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
-    .hero-date { font-size: 0.92rem; opacity: 0.92; margin-bottom: 2px; }
-    .hero-hijri { font-size: 0.92rem; opacity: 0.9; margin-bottom: 8px; }
-    .hero-quote { font-size: 0.95rem; font-weight: 600; color: #fde68a; }
+    .hero-day { font-size: 1.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+    .hero-date { font-size: 0.9rem; opacity: 0.92; margin-bottom: 2px; }
+    .hero-hijri { font-size: 0.9rem; opacity: 0.9; margin-bottom: 8px; }
+    .hero-quote { font-size: 0.92rem; font-weight: 600; color: #fde68a; }
+
+    .hero-right-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
 
     .ring-box {
-      width: 78px;
-      height: 78px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      background: rgba(255, 255, 255, 0.12);
-      border: 4px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.14);
+      border: 3px solid rgba(255, 255, 255, 0.28);
     }
 
-    .ring-pct { font-size: 1.15rem; font-weight: 800; line-height: 1.1; }
-    .ring-sub { font-size: 0.72rem; opacity: 0.9; }
+    .ring-pct { font-size: 1.12rem; font-weight: 800; line-height: 1.1; }
+    .ring-sub { font-size: 0.72rem; opacity: 0.92; }
+
+    .temp-pill {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
     .week-strip {
       display: grid;
@@ -168,8 +181,8 @@
       margin-bottom: 12px;
     }
 
-    .section-title { font-size: 1.25rem; font-weight: 800; line-height: 1.25; }
-    .section-sub { font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
+    .section-title { font-size: 1.22rem; font-weight: 800; line-height: 1.25; }
+    .section-sub { font-size: 0.86rem; color: var(--muted); margin-top: 2px; }
 
     .task-row {
       background: var(--bg);
@@ -219,13 +232,15 @@
       color: var(--green-dark);
     }
 
-    .check-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
+    /* Empty square check box beside item */
+    .tick-box {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 2px solid var(--green);
       background: var(--card);
       color: #ffffff;
+      font-size: 1rem;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -234,7 +249,7 @@
       flex-shrink: 0;
     }
 
-    .check-circle.done {
+    .tick-box.checked {
       background: var(--green);
       border-color: var(--green);
     }
@@ -244,7 +259,6 @@
       color: var(--muted);
     }
 
-    /* Progress Tab Grid like Image 2 */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -358,7 +372,6 @@
     .view-panel { display: none; }
     .view-panel.active { display: block; }
 
-    /* Bottom Nav like Images 1-5 */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -411,8 +424,8 @@
 </head>
 <body>
   <div class="app">
-    <!-- TAB 1: আজ -->
-    <section class="view-panel active" id="panel-today">
+    <!-- TAB 1: Home -->
+    <section class="view-panel active" id="panel-home">
       <div class="hero-card">
         <div class="hero-top">
           <div>
@@ -421,9 +434,12 @@
             <div class="hero-hijri" id="heroHijri">হিজরি তারিখ</div>
             <div class="hero-quote" id="heroQuote">ভালো শুরু, বারাকাল্লাহু ফীকুম</div>
           </div>
-          <div class="ring-box">
-            <div class="ring-pct" id="heroPct">০%</div>
-            <div class="ring-sub" id="heroRatio">০/০</div>
+          <div class="hero-right-stack">
+            <div class="ring-box">
+              <div class="ring-pct" id="heroPct">০%</div>
+              <div class="ring-sub" id="heroRatio">০/০</div>
+            </div>
+            <div class="temp-pill" id="heroTempPill">🌡️ --°C</div>
           </div>
         </div>
         <div class="week-strip" id="weekStrip"></div>
@@ -442,8 +458,8 @@
         <div class="card">
           <div class="section-head">
             <div>
-              <div class="section-title" id="activeGroupTitle">আজকের তালিকা</div>
-              <div class="section-sub" id="activeGroupSub">সম্পন্ন হলে টিক চিহ্ন দিন</div>
+              <div class="section-title" id="activeGroupTitle">আজকের আমল ও রুটিন</div>
+              <div class="section-sub">পাশের খালিঘরে ট্যাপ করলে টিক চিহ্ন উঠবে</div>
             </div>
             <button type="button" class="btn-secondary" id="sampleRoutineBtn">নমুনা সেট</button>
           </div>
@@ -496,19 +512,19 @@
           <div class="stat-box">
             <div class="stat-icon">📅</div>
             <div class="stat-val" id="statJamatCount">০</div>
-            <div class="stat-lbl">জামাতে/সময়মতো</div>
+            <div class="stat-lbl">জামাতে সম্পন্ন</div>
           </div>
         </div>
 
         <div class="card">
           <div class="section-title" style="font-size:1.2rem;">মাসের চিত্র</div>
-          <div class="section-sub" style="margin-bottom:8px;">নভেম্বর মাসের ক্যালেন্ডার</div>
+          <div class="section-sub" style="margin-bottom:8px;">চলতি মাসের ক্যালেন্ডার</div>
           <div class="cal-grid" id="monthCalendar"></div>
         </div>
 
         <div class="card">
           <div class="section-title" style="font-size:1.2rem;">ফরজ নামায ও ওয়াক্ত</div>
-          <div class="section-sub" style="margin-bottom:10px;">জামাতসহ হিসাব ও ওয়াক্তের সময়</div>
+          <div class="section-sub" style="margin-bottom:10px;">জামাতসহ হিসাব</div>
           <div id="fardProgressList"></div>
         </div>
 
@@ -520,15 +536,15 @@
       </div>
     </section>
 
-    <!-- TAB 3: আমি (প্রোফাইল, তসবিহ, নামাজের সময় ও সেটিংস) -->
+    <!-- TAB 3: আমি (তসবিহ, নামাজ/তাপমাত্রা ও সেটিংস) -->
     <section class="view-panel" id="panel-me">
       <div class="content-wrap" style="padding-top:18px;">
         <div class="section-title" style="font-size:1.6rem; margin-bottom:10px;">আমি</div>
 
         <div class="sub-tabs">
           <button type="button" class="cat-pill active" data-sub="tasbih">📿 তসবিহ</button>
-          <button type="button" class="cat-pill" data-sub="prayer">🕌 নামাজ ও লোকেশন</button>
-          <button type="button" class="cat-pill" data-sub="profile">⚙️ প্রোফাইল ও সেটিংস</button>
+          <button type="button" class="cat-pill" data-sub="prayer">🕌 নামাজ ও তাপমাত্রা</button>
+          <button type="button" class="cat-pill" data-sub="settings">⚙️ সেটিংস</button>
         </div>
 
         <div class="card" id="sub-tasbih" style="text-align:center;">
@@ -551,24 +567,28 @@
         <div class="card" id="sub-prayer" style="display:none;">
           <div class="section-head">
             <div>
-              <div class="section-title" style="font-size:1.15rem;">নামাজের সময়সূচি</div>
+              <div class="section-title" style="font-size:1.15rem;">নামাজের সময় ও তাপমাত্রা</div>
               <div class="section-sub" id="locStatusText">📍 লোকেশন সেট হচ্ছে...</div>
             </div>
-            <button type="button" class="btn-secondary" id="getLocBtn">লাইভ লোকেশন</button>
+            <button type="button" class="btn-secondary" id="getLocBtn">লাইভ আপডেট</button>
+          </div>
+          <div class="task-row" style="margin-bottom:12px;">
+            <strong>বর্তমান তাপমাত্রা</strong>
+            <strong id="detailTempText">--°C</strong>
           </div>
           <div id="prayerTimesList"></div>
         </div>
 
-        <div class="card" id="sub-profile" style="display:none;">
-          <div class="section-title" style="font-size:1.15rem; margin-bottom:10px;">প্রোফাইল ও সেটিংস</div>
+        <div class="card" id="sub-settings" style="display:none;">
+          <div class="section-title" style="font-size:1.15rem; margin-bottom:10px;">সেটিংস</div>
           <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
             <input type="text" id="userNameInput" placeholder="আপনার নাম লিখুন" />
             <button type="button" class="btn-primary" id="saveUserBtn">নাম সেভ করুন</button>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button type="button" class="btn-secondary" id="darkModeBtn">ডার্ক মোড</button>
-            <button type="button" class="btn-secondary" id="resetDayChecksBtn">নতুন দিন শুরু</button>
-            <button type="button" class="btn-danger" id="wipeDataBtn">সব মুছুন</button>
+            <button type="button" class="btn-secondary" id="resetDayChecksBtn">সব টিক মুছুন</button>
+            <button type="button" class="btn-danger" id="wipeDataBtn">সব ডেটা রিসেট</button>
           </div>
         </div>
       </div>
@@ -577,16 +597,16 @@
 
   <nav class="bottom-nav" aria-label="বটম নেভিগেশন">
     <div class="bottom-nav-inner">
-      <button type="button" class="tab-btn active" data-tab="today"><span>🏠</span><strong>আজ</strong></button>
+      <button type="button" class="tab-btn active" data-tab="home"><span>🏠</span><strong>Home</strong></button>
       <button type="button" class="tab-btn" data-tab="progress"><span>📊</span><strong>অগ্রগতি</strong></button>
-      <button type="button" class="tab-btn" data-tab="me"><span>👤</span><strong id="navMeLabel">আমি</strong></button>
+      <button type="button" class="tab-btn" data-tab="me"><span>⚙️</span><strong id="navMeLabel">আমি ও সেটিংস</strong></button>
     </div>
   </nav>
 
   <script>
-    const KEY_ITEMS = "sr_items_v7";
-    const KEY_STATE = "sr_state_v7";
-    const KEY_LOC = "sr_loc_v7";
+    const KEY_ITEMS = "sr_items_v8";
+    const KEY_STATE = "sr_state_v8";
+    const KEY_LOC = "sr_loc_v8";
 
     const DEFAULT_ITEMS = [
       { id: "f1", title: "ফজর", sub: "২ রাকাত ফরজ", time: "05:00", cat: "নামায", done: false, jamat: true },
@@ -601,7 +621,7 @@
     ];
 
     let items = JSON.parse(localStorage.getItem(KEY_ITEMS) || "null") || DEFAULT_ITEMS;
-    let state = JSON.parse(localStorage.getItem(KEY_STATE) || '{"userName":"","dark":false,"streak":0,"tasbihCount":0,"tasbihTarget":33,"dhikr":"সুবহানাল্লাহ"}');
+    let state = JSON.parse(localStorage.getItem(KEY_STATE) || '{"userName":"","dark":false,"streak":0,"tasbihCount":0,"tasbihTarget":33,"dhikr":"সুবহানাল্লাহ","tempC":null}');
     let loc = JSON.parse(localStorage.getItem(KEY_LOC) || '{"lat":23.8103,"lng":90.4125,"label":"ঢাকা","live":false}');
 
     let activeCat = "সব";
@@ -616,24 +636,24 @@
       });
     });
 
-    // Sub-tabs inside "আমি"
+    // Sub-tabs inside "আমি ও সেটিংস"
     document.querySelectorAll("[data-sub]").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll("[data-sub]").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        ["tasbih", "prayer", "profile"].forEach(id => {
+        ["tasbih", "prayer", "settings"].forEach(id => {
           document.getElementById(`sub-${id}`).style.display = btn.dataset.sub === id ? "block" : "none";
         });
       });
     });
 
-    // Category Filter Pills
+    // Category Pills
     document.querySelectorAll("#todayCategoryPills .cat-pill").forEach(pill => {
       pill.addEventListener("click", () => {
         document.querySelectorAll("#todayCategoryPills .cat-pill").forEach(p => p.classList.remove("active"));
         pill.classList.add("active");
         activeCat = pill.dataset.cat;
-        renderToday();
+        renderHome();
       });
     });
 
@@ -641,6 +661,26 @@
       localStorage.setItem(KEY_ITEMS, JSON.stringify(items));
       localStorage.setItem(KEY_STATE, JSON.stringify(state));
       renderAll();
+    }
+
+    async function fetchTemperature() {
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lng}&current=temperature_2m&timezone=auto`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.current && typeof data.current.temperature_2m === "number") {
+          state.tempC = Math.round(data.current.temperature_2m);
+          localStorage.setItem(KEY_STATE, JSON.stringify(state));
+          renderTemp();
+        }
+      } catch (e) {}
+    }
+
+    function renderTemp() {
+      const val = typeof state.tempC === "number" ? `${state.tempC.toLocaleString("bn-BD")}°C` : "--°C";
+      document.getElementById("heroTempPill").textContent = `🌡️ ${val}`;
+      document.getElementById("detailTempText").textContent = val;
     }
 
     function renderHeroDates() {
@@ -661,8 +701,7 @@
       document.getElementById("heroHijri").textContent = hijri;
 
       const weekNames = ["শনি", "রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র"];
-      const jsDay = now.getDay(); // 0=Sun..6=Sat
-      const satIndex = (jsDay + 1) % 7;
+      const satIndex = (now.getDay() + 1) % 7;
       const strip = document.getElementById("weekStrip");
       strip.innerHTML = "";
       for (let i = 0; i < 7; i++) {
@@ -691,9 +730,7 @@
         cal.appendChild(h);
       });
 
-      for (let b = 0; b < startOffset; b++) {
-        cal.appendChild(document.createElement("div"));
-      }
+      for (let b = 0; b < startOffset; b++) cal.appendChild(document.createElement("div"));
       for (let day = 1; day <= daysInMonth; day++) {
         const cell = document.createElement("div");
         cell.className = "cal-cell" + (day === now.getDate() ? " active-day" : "");
@@ -702,14 +739,13 @@
       }
     }
 
-    function renderToday() {
+    function renderHome() {
       const doneCount = items.filter(i => i.done).length;
       const totalCount = items.length;
       const pct = totalCount === 0 ? 0 : Math.round((doneCount / totalCount) * 100);
 
       document.getElementById("heroPct").textContent = `${pct.toLocaleString("bn-BD")}%`;
       document.getElementById("heroRatio").textContent = `${doneCount.toLocaleString("bn-BD")}/${totalCount.toLocaleString("bn-BD")}`;
-
       document.getElementById("activeGroupTitle").textContent = activeCat === "সব" ? "আজকের আমল ও রুটিন" : activeCat;
 
       const listEl = document.getElementById("todayTaskList");
@@ -729,10 +765,10 @@
               ${item.cat === "নামায" ? `<button type="button" class="jamat-pill ${item.jamat ? "active" : ""}">জামাতে ${item.jamat ? "✓" : ""}</button>` : ""}
             </div>
           </div>
-          <button type="button" class="check-circle ${item.done ? "done" : ""}">${item.done ? "✓" : ""}</button>
+          <button type="button" class="tick-box ${item.done ? "checked" : ""}" aria-label="টিক দিন">${item.done ? "✓" : ""}</button>
         `;
 
-        row.querySelector(".check-circle").addEventListener("click", () => {
+        row.querySelector(".tick-box").addEventListener("click", () => {
           item.done = !item.done;
           if (items.length > 0 && items.every(x => x.done)) {
             state.streak = (state.streak || 0) + 1;
@@ -801,11 +837,12 @@
 
     function renderMe() {
       document.body.classList.toggle("dark", Boolean(state.dark));
-      document.getElementById("navMeLabel").textContent = state.userName ? state.userName : "আমি";
+      document.getElementById("navMeLabel").textContent = state.userName ? state.userName : "আমি ও সেটিংস";
       document.getElementById("userNameInput").value = state.userName || "";
       document.getElementById("tasbihNum").textContent = (state.tasbihCount || 0).toLocaleString("bn-BD");
       document.getElementById("dhikrChoice").value = state.dhikr || "সুবহানাল্লাহ";
       document.getElementById("locStatusText").textContent = `📍 ${loc.label} (${loc.lat.toFixed(2)}°, ${loc.lng.toFixed(2)}°)`;
+      renderTemp();
 
       const pList = document.getElementById("prayerTimesList");
       pList.innerHTML = "";
@@ -819,7 +856,7 @@
 
     function renderAll() {
       renderHeroDates();
-      renderToday();
+      renderHome();
       renderProgress();
       renderMe();
     }
@@ -876,20 +913,27 @@
       localStorage.removeItem(KEY_ITEMS);
       localStorage.removeItem(KEY_STATE);
       items = DEFAULT_ITEMS.map(d => ({ ...d }));
-      state = { userName: "", dark: false, streak: 0, tasbihCount: 0, tasbihTarget: 33, dhikr: "সুবহানাল্লাহ" };
+      state = { userName: "", dark: false, streak: 0, tasbihCount: 0, tasbihTarget: 33, dhikr: "সুবহানাল্লাহ", tempC: state.tempC };
       renderAll();
     });
 
     document.getElementById("getLocBtn").addEventListener("click", () => {
-      if (!navigator.geolocation) return;
+      if (!navigator.geolocation) {
+        fetchTemperature();
+        return;
+      }
       navigator.geolocation.getCurrentPosition(pos => {
         loc = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: "লাইভ অবস্থান", live: true };
         localStorage.setItem(KEY_LOC, JSON.stringify(loc));
         renderMe();
+        fetchTemperature();
+      }, () => {
+        fetchTemperature();
       });
     });
 
     renderAll();
+    fetchTemperature();
   </script>
 </body>
 </html>
