@@ -3,37 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f766e" />
-  <meta name="description" content="প্রতিদিনের রুটিন, লাইভ লোকেশন অনুযায়ী নামাজের সময়, বাংলা ও হিজরি তারিখ, তসবিহ ও দোয়ার তালিকা।" />
-  <title>স্মার্ট দৈনিক রুটিন ও আমল</title>
+  <meta name="theme-color" content="#156b49" />
+  <meta name="description" content="আজকের রুটিন ও আমল, মাসিক অগ্রগতি, নামাজের সময়, তসবিহ ও প্রোফাইল।" />
+  <title>স্মার্ট রুটিন ও অগ্রগতি</title>
   <link rel="manifest" id="manifest-placeholder" />
   <style>
     :root {
-      --bg: #f0fdfa;
+      --bg: #f6f7f2;
       --card: #ffffff;
-      --primary: #0f766e;
-      --primary-light: #ccfbf1;
-      --primary-dark: #115e59;
-      --text: #134e4a;
-      --muted: #5f7a78;
-      --border: #cbd5e1;
-      --danger: #e11d48;
-      --accent: #f59e0b;
+      --green: #156b49;
+      --green-dark: #0f4f35;
+      --green-soft: #e6f3ec;
+      --text: #1c2421;
+      --muted: #64706a;
+      --border: #e3e7e2;
+      --danger: #dc2626;
+      --accent: #eab308;
       --input-bg: #ffffff;
     }
 
     body.dark {
-      --bg: #0b1315;
-      --card: #132024;
-      --primary: #14b8a6;
-      --primary-light: #134e4a;
-      --primary-dark: #5eead4;
-      --text: #e6fffa;
-      --muted: #94a3b8;
-      --border: #243b42;
-      --danger: #fb7185;
-      --accent: #fbbf24;
-      --input-bg: #0f1a1d;
+      --bg: #0c1411;
+      --card: #15221d;
+      --green: #22a06b;
+      --green-dark: #4ade80;
+      --green-soft: #143326;
+      --text: #eef7f2;
+      --muted: #9fb0a8;
+      --border: #253b32;
+      --danger: #f87171;
+      --accent: #facc15;
+      --input-bg: #101b17;
     }
 
     * {
@@ -46,1312 +46,849 @@
     body {
       background: var(--bg);
       color: var(--text);
-      padding: 16px 12px 76px;
+      padding-bottom: 84px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
     .app {
-      max-width: 680px;
+      max-width: 540px;
       margin: 0 auto;
     }
 
-    header {
-      background: linear-gradient(135deg, #0f766e, #0d9488);
+    /* Top Green Hero Card like Image 1 */
+    .hero-card {
+      background: linear-gradient(155deg, #1b7d56, #11573b);
       color: #ffffff;
-      padding: 18px 20px;
-      border-radius: 18px;
-      margin-bottom: 12px;
-      box-shadow: 0 10px 25px rgba(15, 118, 110, 0.2);
+      padding: 20px 18px 22px;
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+      box-shadow: 0 10px 26px rgba(17, 87, 59, 0.18);
+    }
+
+    .hero-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    header h1 { font-size: 1.28rem; margin-bottom: 3px; }
-    header p { font-size: 0.84rem; opacity: 0.94; line-height: 1.45; }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .pill-badge {
-      background: rgba(255, 255, 255, 0.18);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .streak-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 12px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .streak-badge span { display: block; font-size: 1.05rem; font-weight: 800; }
-    .streak-badge small { font-size: 0.68rem; }
-
-    .nav-menu {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
-      background: var(--card);
-      padding: 6px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
+      align-items: flex-start;
+      gap: 12px;
       margin-bottom: 14px;
     }
 
-    .nav-btn {
-      background: transparent;
-      color: var(--text);
-      padding: 8px 6px;
-      border-radius: 10px;
-      font-size: 0.8rem;
+    .hero-day { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+    .hero-date { font-size: 0.92rem; opacity: 0.92; margin-bottom: 2px; }
+    .hero-hijri { font-size: 0.92rem; opacity: 0.9; margin-bottom: 8px; }
+    .hero-quote { font-size: 0.95rem; font-weight: 600; color: #fde68a; }
+
+    .ring-box {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.12);
+      border: 4px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .ring-pct { font-size: 1.15rem; font-weight: 800; line-height: 1.1; }
+    .ring-sub { font-size: 0.72rem; opacity: 0.9; }
+
+    .week-strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .week-day-name { font-size: 0.78rem; opacity: 0.88; margin-bottom: 6px; }
+
+    .week-num {
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      margin: 0 auto;
+      border-radius: 50%;
+      font-size: 0.88rem;
       font-weight: 700;
-      border: none;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .week-num.today {
+      background: #ffffff;
+      color: #11573b;
+    }
+
+    .content-wrap {
+      padding: 14px 14px 0;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .cat-pill {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
       cursor: pointer;
     }
 
-    .nav-btn.active {
-      background: var(--primary);
+    .cat-pill.active {
+      background: var(--green);
       color: #ffffff;
-    }
-
-    body.dark .nav-btn.active { color: #062825; }
-
-    .view-section { display: none; }
-    .view-section.active { display: block; }
-
-    #installBanner {
-      display: none;
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
-      color: #92400e;
-      padding: 12px 16px;
-      border-radius: 14px;
-      margin-bottom: 14px;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+      border-color: var(--green);
     }
 
     .card {
       background: var(--card);
-      padding: 16px;
-      border-radius: 16px;
       border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px;
       margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
     }
 
-    .date-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .date-pill {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      padding: 6px 11px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .top-meta-bar {
+    .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 12px;
     }
 
-    .loc-chip {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
+    .section-title { font-size: 1.25rem; font-weight: 800; line-height: 1.25; }
+    .section-sub { font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
+
+    .task-row {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 13px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
     }
 
-    .waqt-banner {
-      background: linear-gradient(135deg, #115e59, #0f766e);
+    .task-row:last-child { margin-bottom: 0; }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .badge-soft {
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .jamat-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .jamat-pill.active {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: var(--green-dark);
+    }
+
+    .check-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--card);
       color: #ffffff;
-      padding: 16px;
-      border-radius: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-circle.done {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .done-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* Progress Tab Grid like Image 2 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
       margin-bottom: 14px;
     }
 
-    .waqt-banner-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .waqt-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .waqt-item {
+    .stat-box {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .stat-val { font-size: 1.5rem; font-weight: 800; margin-bottom: 2px; }
+    .stat-lbl { font-size: 0.85rem; color: var(--muted); }
+
+    .month-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .waqt-item.current {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .waqt-name { font-weight: 700; font-size: 0.95rem; }
-    .waqt-time { font-weight: 800; font-size: 0.95rem; color: var(--primary-dark); }
-
-    .tasbih-box {
-      text-align: center;
-      padding: 10px 4px;
-    }
-
-    .tasbih-count {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin: 10px 0 6px;
-    }
-
-    .tasbih-sub {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .tasbih-big-btn {
-      width: 100%;
-      max-width: 280px;
-      padding: 16px 20px;
-      font-size: 1.05rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
       font-weight: 700;
-      border-radius: 16px;
-      background: var(--primary);
-      color: #ffffff;
-      margin: 0 auto 12px;
-      display: block;
+      font-size: 0.9rem;
     }
 
-    body.dark .tasbih-big-btn { color: #062825; }
-
-    .dua-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
       margin-top: 10px;
     }
 
-    .dua-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .dua-title {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-
-    .dua-arabic {
-      font-size: 1.18rem;
-      line-height: 1.8;
-      text-align: right;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .dua-pron {
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .dua-meaning {
-      font-size: 0.84rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.92rem;
+    .cal-cell {
+      padding: 8px 4px;
+      border-radius: 10px;
+      font-size: 0.85rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      background: var(--bg);
+      color: var(--text);
     }
 
-    .bar-bg {
-      height: 12px;
+    .cal-cell.active-day {
+      outline: 2px solid var(--green);
+      background: var(--green-soft);
+    }
+
+    .prog-track {
+      height: 9px;
       background: var(--border);
       border-radius: 999px;
       overflow: hidden;
+      margin: 7px 0 4px;
     }
 
-    .bar-fill {
+    .prog-fill {
       height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #0d9488, var(--primary));
-      transition: width 0.3s ease;
+      background: var(--green);
+      border-radius: 999px;
+      transition: width 0.25s ease;
     }
 
-    .form-card {
-      background: var(--card);
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      margin-bottom: 14px;
+    .form-grid {
       display: grid;
-      grid-template-columns: 112px 135px 1fr auto;
-      gap: 10px;
+      grid-template-columns: 108px 1fr auto;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    input[type="time"],
-    input[type="text"],
-    input[type="email"],
-    textarea,
-    select {
-      padding: 11px;
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.92rem;
-      outline: none;
       background: var(--input-bg);
       color: var(--text);
-      width: 100%;
+      font-size: 0.9rem;
+      outline: none;
     }
-
-    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
 
     button {
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 10px 14px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.86rem;
+      font-weight: 700;
       cursor: pointer;
     }
 
-    .btn-add { background: var(--primary); color: #ffffff; }
-    body.dark .btn-add { color: #062825; }
-    .btn-install { background: var(--accent); color: #1e293b; padding: 8px 14px; font-size: 0.84rem; }
+    .btn-primary { background: var(--green); color: #ffffff; }
+    .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
     .btn-danger { background: var(--danger); color: #ffffff; }
 
-    .filter-row {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
+    .view-panel { display: none; }
+    .view-panel.active { display: block; }
 
-    .filter-chip {
+    /* Bottom Nav like Images 1-5 */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      white-space: nowrap;
+      border-top: 1px solid var(--border);
+      z-index: 100;
     }
 
-    .filter-chip.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
-    }
-
-    body.dark .filter-chip.active { color: #062825; }
-
-    .actions-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-secondary {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 0.82rem;
+    .bottom-nav-inner {
+      max-width: 540px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       padding: 8px 12px;
+      gap: 8px;
     }
 
-    .routine-list {
+    .tab-btn {
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 6px;
+      border-radius: 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.82rem;
     }
 
-    .task-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .tab-btn.active {
+      background: var(--green-soft);
+      color: var(--green-dark);
     }
 
-    .task-left {
+    .sub-tabs {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
+      gap: 8px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
     }
 
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--primary);
-      cursor: pointer;
-    }
-
-    .task-time {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      background: var(--primary-light);
-      padding: 4px 8px;
-      border-radius: 8px;
-      white-space: nowrap;
-    }
-
-    .cat-tag {
-      font-size: 0.76rem;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .task-title { font-size: 0.96rem; word-break: break-word; }
-    .done .task-title { text-decoration: line-through; color: var(--muted); }
-
-    .btn-del {
-      background: transparent;
-      color: var(--danger);
-      padding: 6px 8px;
-      font-size: 1rem;
-    }
-
-    .setting-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .setting-row:last-child { border-bottom: none; }
-    .setting-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
-    .setting-desc { font-size: 0.82rem; color: var(--muted); }
-    .stack { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 32px 16px;
-      background: var(--card);
-      border-radius: 16px;
-      border: 1px dashed var(--border);
-    }
-
-    #alarmPopup {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #115e59;
-      color: #ffffff;
-      padding: 16px 22px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-      z-index: 999;
-      align-items: center;
-      gap: 14px;
-      width: 90%;
-      max-width: 420px;
-    }
-
-    @media (max-width: 620px) {
-      .nav-menu { grid-template-columns: repeat(3, 1fr); }
-      .waqt-grid { grid-template-columns: 1fr; }
-      .form-card { grid-template-columns: 1fr 1fr; }
-      #taskTitle { grid-column: span 2; }
-      .btn-add { grid-column: span 2; }
+    @media (max-width: 480px) {
+      .form-grid { grid-template-columns: 1fr 1fr; }
+      #newTaskTitle { grid-column: span 2; }
+      .btn-primary.add-task-btn { grid-column: span 2; }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <div id="installBanner">
-      <span>📲 অ্যাপটি আপনার ডিভাইসে ইনস্টল করুন</span>
-      <button type="button" class="btn-install" id="installBtn">ইনস্টল করুন</button>
-    </div>
-
-    <header>
-      <div>
-        <h1>স্মার্ট দৈনিক রুটিন</h1>
-        <p id="todayDate"></p>
-      </div>
-      <div class="header-right">
-        <span class="pill-badge" id="headerUserBadge">অতিথি</span>
-        <div class="streak-badge">
-          <span id="streakCount">০ দিন</span>
-          <small>ধারাবাহিকতা</small>
-        </div>
-      </div>
-    </header>
-
-    <nav class="nav-menu" aria-label="মূল মেনু">
-      <button type="button" class="nav-btn active" data-view="routine">📋 রুটিন</button>
-      <button type="button" class="nav-btn" data-view="prayer">🕌 নামাজ</button>
-      <button type="button" class="nav-btn" data-view="tasbih">📿 তসবিহ</button>
-      <button type="button" class="nav-btn" data-view="settings">⚙️ সেটিংস</button>
-      <button type="button" class="nav-btn" data-view="account">👤 লগইন</button>
-    </nav>
-
-    <!-- View 1: Routine -->
-    <section class="view-section active" id="view-routine">
-      <div class="card">
-        <div class="date-strip">
-          <span class="date-pill" id="banglaDatePill">🗓️ বাংলা তারিখ লোড হচ্ছে...</span>
-          <span class="date-pill" id="hijriDatePill">🌙 হিজরি তারিখ লোড হচ্ছে...</span>
-        </div>
-        <div class="top-meta-bar">
-          <span class="loc-chip" id="routineLocChip">📍 লোকেশন লোড হচ্ছে...</span>
-          <span class="loc-chip" id="routineNextPrayer">🕌 পরবর্তী ওয়াক্ত হিসাব হচ্ছে...</span>
-        </div>
-        <div class="progress-top">
-          <span>আজকের অগ্রগতি</span>
-          <span id="progressText">০ / ০ সম্পন্ন</span>
-        </div>
-        <div class="bar-bg">
-          <div class="bar-fill" id="progressBar"></div>
-        </div>
-      </div>
-
-      <form class="form-card" id="taskForm">
-        <input type="time" id="taskTime" required />
-        <select id="taskCategory" aria-label="ক্যাটাগরি">
-          <option value="পড়াশোনা">📚 পড়াশোনা</option>
-          <option value="কাজ / অফিস">💼 কাজ / অফিস</option>
-          <option value="স্বাস্থ্য">🏃 স্বাস্থ্য</option>
-          <option value="ব্যক্তিগত">🌱 ব্যক্তিগত</option>
-        </select>
-        <input type="text" id="taskTitle" placeholder="কাজের নাম লিখুন..." required />
-        <button type="submit" class="btn-add">যোগ করুন</button>
-      </form>
-
-      <div class="filter-row" id="filterRow">
-        <button type="button" class="filter-chip active" data-cat="সব">সব</button>
-        <button type="button" class="filter-chip" data-cat="পড়াশোনা">📚 পড়াশোনা</button>
-        <button type="button" class="filter-chip" data-cat="কাজ / অফিস">💼 কাজ / অফিস</button>
-        <button type="button" class="filter-chip" data-cat="স্বাস্থ্য">🏃 স্বাস্থ্য</button>
-        <button type="button" class="filter-chip" data-cat="ব্যক্তিগত">🌱 ব্যক্তিগত</button>
-      </div>
-
-      <div class="actions-row">
-        <button type="button" class="btn-secondary" id="resetChecksBtn">🔄 নতুন দিন শুরু</button>
-        <button type="button" class="btn-secondary" id="loadSampleBtn">📋 নমুনা রুটিন</button>
-      </div>
-
-      <div class="routine-list" id="routineList"></div>
-    </section>
-
-    <!-- View 2: Live Location, Dates & Prayer Times -->
-    <section class="view-section" id="view-prayer">
-      <div class="waqt-banner">
-        <div class="waqt-banner-top">
+    <!-- TAB 1: আজ -->
+    <section class="view-panel active" id="panel-today">
+      <div class="hero-card">
+        <div class="hero-top">
           <div>
-            <small style="opacity:0.85;">বর্তমান ওয়াক্ত</small>
-            <h2 id="currentWaqtName" style="font-size:1.3rem;">হিসাব হচ্ছে...</h2>
+            <div class="hero-day" id="heroDay">আজ, শুক্রবার</div>
+            <div class="hero-date" id="heroGregorian">২০ নভেম্বর</div>
+            <div class="hero-hijri" id="heroHijri">হিজরি তারিখ</div>
+            <div class="hero-quote" id="heroQuote">ভালো শুরু, বারাকাল্লাহু ফীকুম</div>
           </div>
-          <div style="text-align:right;">
-            <small style="opacity:0.85;">পরবর্তী ওয়াক্ত</small>
-            <div id="nextWaqtInfo" style="font-weight:700; font-size:0.95rem;">—</div>
+          <div class="ring-box">
+            <div class="ring-pct" id="heroPct">০%</div>
+            <div class="ring-sub" id="heroRatio">০/০</div>
           </div>
         </div>
-        <p id="prayerDatesSummary" style="font-size:0.86rem; opacity:0.95; margin-bottom:4px;"></p>
-        <p id="locationDetailText" style="font-size:0.84rem; opacity:0.9;">📍 লাইভ লোকেশন নেওয়া হচ্ছে...</p>
+        <div class="week-strip" id="weekStrip"></div>
       </div>
 
-      <div class="card">
-        <div class="top-meta-bar">
-          <strong>আজকের নামাজের সময়সূচি</strong>
-          <button type="button" class="btn-secondary" id="refreshLocBtn">📍 লাইভ লোকেশন আপডেট</button>
+      <div class="content-wrap">
+        <div class="chip-row" id="todayCategoryPills">
+          <button type="button" class="cat-pill active" data-cat="সব">সব আমল ও কাজ</button>
+          <button type="button" class="cat-pill" data-cat="নামায">নামায</button>
+          <button type="button" class="cat-pill" data-cat="নফল নামায">নফল নামায</button>
+          <button type="button" class="cat-pill" data-cat="সকাল-সন্ধ্যার আমল">সকাল-সন্ধ্যার আমল</button>
+          <button type="button" class="cat-pill" data-cat="ঘুমের আগের আমল">ঘুমের আগের আমল</button>
+          <button type="button" class="cat-pill" data-cat="দৈনন্দিন কাজ">দৈনন্দিন কাজ</button>
         </div>
-        <div class="waqt-grid" id="prayerGrid"></div>
-      </div>
 
-      <div class="card">
-        <h3 style="font-size:1rem; margin-bottom:4px;">🤲 প্রয়োজনীয় দোয়াসমূহ</h3>
-        <p class="setting-desc">দোয়াগুলো পড়ুন অথবা তসবিহ কাউন্টারে পাঠিয়ে গণনা শুরু করুন</p>
-        <div class="dua-list" id="duaList"></div>
-      </div>
-    </section>
+        <div class="card">
+          <div class="section-head">
+            <div>
+              <div class="section-title" id="activeGroupTitle">আজকের তালিকা</div>
+              <div class="section-sub" id="activeGroupSub">সম্পন্ন হলে টিক চিহ্ন দিন</div>
+            </div>
+            <button type="button" class="btn-secondary" id="sampleRoutineBtn">নমুনা সেট</button>
+          </div>
 
-    <!-- View 3: Tasbih Counter -->
-    <section class="view-section" id="view-tasbih">
-      <div class="card tasbih-box">
-        <label for="dhikrSelect" style="font-weight:700; display:block; margin-bottom:8px;">জিকির / দোয়া নির্বাচন করুন</label>
-        <select id="dhikrSelect" style="max-width:360px; margin:0 auto 10px; display:block;">
-          <option value="সুবহানাল্লাহ">সুবহানাল্লাহ (سُبْحَانَ اللَّهِ)</option>
-          <option value="আলহামদুলিল্লাহ">আলহামদুলিল্লাহ (الْحَمْدُ لِلَّهِ)</option>
-          <option value="আল্লাহু আকবার">আল্লাহু আকবার (اللَّهُ أَكْبَرُ)</option>
-          <option value="আস্তাগফিরুল্লাহ">আস্তাগফিরুল্লাহ (أَسْتَغْفِرُ اللَّهَ)</option>
-          <option value="লা ইলাহা ইল্লা আনতা সুবহানাকা">লা ইলাহা ইল্লা আনতা সুবহানাকা</option>
-        </select>
+          <div id="todayTaskList"></div>
 
-        <div class="tasbih-count" id="tasbihCount">০</div>
-        <div class="tasbih-sub" id="tasbihTargetText">টার্গেট: ৩৩</div>
-
-        <button type="button" class="tasbih-big-btn" id="tasbihTapBtn">📿 গণনা করুন (+১)</button>
-
-        <div class="actions-row">
-          <button type="button" class="btn-secondary" data-target="33">টার্গেট ৩৩</button>
-          <button type="button" class="btn-secondary" data-target="100">টার্গেট ১০০</button>
-          <button type="button" class="btn-secondary" data-target="0">আনলিমিটেড</button>
-          <button type="button" class="btn-danger" id="tasbihResetBtn">🔄 রিসেট</button>
+          <form class="form-grid" id="addTaskForm">
+            <input type="time" id="newTaskTime" value="08:00" required />
+            <select id="newTaskCat">
+              <option value="নামায">নামায</option>
+              <option value="নফল নামায">নফল নামায</option>
+              <option value="সকাল-সন্ধ্যার আমল">সকাল-সন্ধ্যার আমল</option>
+              <option value="ঘুমের আগের আমল">ঘুমের আগের আমল</option>
+              <option value="দৈনন্দিন কাজ">দৈনন্দিন কাজ</option>
+            </select>
+            <input type="text" id="newTaskTitle" placeholder="নতুন কাজ বা আমল লিখুন..." required />
+            <button type="submit" class="btn-primary add-task-btn">যোগ</button>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- View 4: Settings -->
-    <section class="view-section" id="view-settings">
-      <div class="card">
-        <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাপ সেটিংস</h2>
-
-        <div class="setting-row">
+    <!-- TAB 2: অগ্রগতি -->
+    <section class="view-panel" id="panel-progress">
+      <div class="content-wrap" style="padding-top:18px;">
+        <div class="section-head">
           <div>
-            <div class="setting-title">ডার্ক মোড (Dark Mode)</div>
-            <div class="setting-desc">রাতের ব্যবহারের জন্য গাঢ় থিম চালু বা বন্ধ করুন</div>
+            <div class="section-sub">আপনার আমল ও রুটিনের</div>
+            <div class="section-title" style="font-size:1.75rem;">অগ্রগতি</div>
           </div>
-          <button type="button" class="btn-secondary" id="themeToggleBtn">🌙 ডার্ক</button>
+          <div class="month-bar" id="monthLabel">নভেম্বর ২০২৬</div>
         </div>
 
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">রিমাইন্ডার অ্যালার্ম সাউন্ড</div>
-            <div class="setting-desc">নির্ধারিত সময়ে সতর্কবার্তা ও টোন বাজানো</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-icon">◎</div>
+            <div class="stat-val" id="statAvgPct">০%</div>
+            <div class="stat-lbl">আজকের পূর্ণতা</div>
           </div>
-          <button type="button" class="btn-secondary" id="soundToggleBtn">🔔 চালু</button>
+          <div class="stat-box">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-val" id="statCompletedItems">০</div>
+            <div class="stat-lbl">সম্পন্ন কাজ/আমল</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-val" id="statStreak">০ দিন</div>
+            <div class="stat-lbl">ধারাবাহিকতা</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon">📅</div>
+            <div class="stat-val" id="statJamatCount">০</div>
+            <div class="stat-lbl">জামাতে/সময়মতো</div>
+          </div>
         </div>
 
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">আসর ওয়াক্তের হিসাব পদ্ধতি</div>
-            <div class="setting-desc">হানাফি (ছায়া ২ গুণ) বা শাফিঈ/সর্বজনীন (ছায়া ১ গুণ)</div>
-          </div>
-          <select id="asrMethodSelect" style="max-width:170px;">
-            <option value="hanafi">হানাফি</option>
-            <option value="standard">শাফিঈ / সাধারণ</option>
+        <div class="card">
+          <div class="section-title" style="font-size:1.2rem;">মাসের চিত্র</div>
+          <div class="section-sub" style="margin-bottom:8px;">নভেম্বর মাসের ক্যালেন্ডার</div>
+          <div class="cal-grid" id="monthCalendar"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-title" style="font-size:1.2rem;">ফরজ নামায ও ওয়াক্ত</div>
+          <div class="section-sub" style="margin-bottom:10px;">জামাতসহ হিসাব ও ওয়াক্তের সময়</div>
+          <div id="fardProgressList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-title" style="font-size:1.2rem;">বিভাগভিত্তিক গড়</div>
+          <div class="section-sub" style="margin-bottom:10px;">কোন দিকে বেশি মনোযোগ দরকার</div>
+          <div id="categoryBreakdownList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: আমি (প্রোফাইল, তসবিহ, নামাজের সময় ও সেটিংস) -->
+    <section class="view-panel" id="panel-me">
+      <div class="content-wrap" style="padding-top:18px;">
+        <div class="section-title" style="font-size:1.6rem; margin-bottom:10px;">আমি</div>
+
+        <div class="sub-tabs">
+          <button type="button" class="cat-pill active" data-sub="tasbih">📿 তসবিহ</button>
+          <button type="button" class="cat-pill" data-sub="prayer">🕌 নামাজ ও লোকেশন</button>
+          <button type="button" class="cat-pill" data-sub="profile">⚙️ প্রোফাইল ও সেটিংস</button>
+        </div>
+
+        <div class="card" id="sub-tasbih" style="text-align:center;">
+          <div class="section-title" style="font-size:1.15rem; margin-bottom:8px;">ডিজিটাল তসবিহ</div>
+          <select id="dhikrChoice" style="max-width:320px; margin:0 auto 12px; display:block;">
+            <option value="সুবহানাল্লাহ">সুবহানাল্লাহ</option>
+            <option value="আলহামদুলিল্লাহ">আলহামদুলিল্লাহ</option>
+            <option value="আল্লাহু আকবার">আল্লাহু আকবার</option>
+            <option value="আস্তাগফিরুল্লাহ">আস্তাগফিরুল্লাহ</option>
           </select>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">হিজরি তারিখ সমন্বয় (দিন)</div>
-            <div class="setting-desc">চাঁদ দেখা অনুযায়ী হিজরি তারিখ ১ দিন আগে/পরে মিলিয়ে নিন</div>
-          </div>
-          <select id="hijriOffsetSelect" style="max-width:170px;">
-            <option value="-1">-১ দিন</option>
-            <option value="0">০ দিন (স্বয়ংক্রিয়)</option>
-            <option value="1">+১ দিন</option>
-          </select>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="setting-title">রুটিন ব্যাকআপ (JSON)</div>
-            <div class="setting-desc">নিজের রুটিন কপি করে অন্য ডিভাইসে রিস্টোর করুন</div>
-          </div>
-          <button type="button" class="btn-secondary" id="exportBtn">📤 ব্যাকআপ কপি</button>
-        </div>
-
-        <div class="stack">
-          <textarea id="backupBox" rows="3" placeholder="ব্যাকআপ কোড এখানে দেখা যাবে অথবা রিস্টোর করার কোড পেস্ট করুন..."></textarea>
-          <div class="actions-row" style="margin-bottom:0; justify-content:flex-start;">
-            <button type="button" class="btn-secondary" id="importBtn">📥 রিস্টোর করুন</button>
-            <button type="button" class="btn-danger" id="clearAllBtn">🗑️ সব ডেটা মুছুন</button>
+          <div id="tasbihNum" style="font-size:2.6rem; font-weight:800; color:var(--green); margin:8px 0;">০</div>
+          <button type="button" class="btn-primary" id="tasbihPlusBtn" style="padding:14px 28px; font-size:1rem; margin-bottom:10px;">গণনা করুন (+১)</button>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+            <button type="button" class="btn-secondary" id="tasbihTarget33">টার্গেট ৩৩</button>
+            <button type="button" class="btn-secondary" id="tasbihTarget100">টার্গেট ১০০</button>
+            <button type="button" class="btn-danger" id="tasbihClearBtn">রিসেট</button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- View 5: Login / Account -->
-    <section class="view-section" id="view-account">
-      <div class="card" id="loggedOutBox">
-        <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাকাউন্টে লগইন করুন</h2>
-        <p class="setting-desc" style="margin-bottom:12px;">
-          আপনার নাম ও ইমেইল দিয়ে প্রোফাইল সেট করুন। তথ্যগুলো আপনার ডিভাইসের ব্রাউজারেই সংরক্ষিত থাকবে।
-        </p>
-        <form class="stack" id="loginForm">
-          <input type="text" id="loginName" placeholder="আপনার নাম লিখুন" required />
-          <input type="email" id="loginEmail" placeholder="ইমেইল ঠিকানা (যেমন: name@example.com)" required />
-          <button type="submit" class="btn-add">লগইন করুন</button>
-        </form>
-      </div>
+        <div class="card" id="sub-prayer" style="display:none;">
+          <div class="section-head">
+            <div>
+              <div class="section-title" style="font-size:1.15rem;">নামাজের সময়সূচি</div>
+              <div class="section-sub" id="locStatusText">📍 লোকেশন সেট হচ্ছে...</div>
+            </div>
+            <button type="button" class="btn-secondary" id="getLocBtn">লাইভ লোকেশন</button>
+          </div>
+          <div id="prayerTimesList"></div>
+        </div>
 
-      <div class="card" id="loggedInBox" style="display:none;">
-        <h2 style="font-size:1.05rem; margin-bottom:6px;">প্রোফাইল তথ্য</h2>
-        <p style="margin-bottom:4px;"><strong>নাম:</strong> <span id="profileName"></span></p>
-        <p style="margin-bottom:14px;"><strong>ইমেইল:</strong> <span id="profileEmail"></span></p>
-        <button type="button" class="btn-danger" id="logoutBtn">লগআউট করুন</button>
+        <div class="card" id="sub-profile" style="display:none;">
+          <div class="section-title" style="font-size:1.15rem; margin-bottom:10px;">প্রোফাইল ও সেটিংস</div>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
+            <input type="text" id="userNameInput" placeholder="আপনার নাম লিখুন" />
+            <button type="button" class="btn-primary" id="saveUserBtn">নাম সেভ করুন</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn-secondary" id="darkModeBtn">ডার্ক মোড</button>
+            <button type="button" class="btn-secondary" id="resetDayChecksBtn">নতুন দিন শুরু</button>
+            <button type="button" class="btn-danger" id="wipeDataBtn">সব মুছুন</button>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 
-  <div id="alarmPopup">
-    <div style="flex:1">
-      <strong style="display:block; font-size:0.85rem; opacity:0.85;">⏰ রুটিন রিমাইন্ডার</strong>
-      <span id="alarmTaskName" style="font-size:1.05rem; font-weight:700;"></span>
+  <nav class="bottom-nav" aria-label="বটম নেভিগেশন">
+    <div class="bottom-nav-inner">
+      <button type="button" class="tab-btn active" data-tab="today"><span>🏠</span><strong>আজ</strong></button>
+      <button type="button" class="tab-btn" data-tab="progress"><span>📊</span><strong>অগ্রগতি</strong></button>
+      <button type="button" class="tab-btn" data-tab="me"><span>👤</span><strong id="navMeLabel">আমি</strong></button>
     </div>
-    <button type="button" class="btn-install" id="closeAlarmBtn">ঠিক আছে</button>
-  </div>
+  </nav>
 
   <script>
-    const STORAGE_KEY = "smart_routine_tasks_v6";
-    const META_KEY = "smart_routine_meta_v6";
-    const USER_KEY = "smart_routine_user_v6";
-    const TASBIH_KEY = "smart_routine_tasbih_v6";
-    const LOC_KEY = "smart_routine_loc_v6";
+    const KEY_ITEMS = "sr_items_v7";
+    const KEY_STATE = "sr_state_v7";
+    const KEY_LOC = "sr_loc_v7";
 
-    let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    let meta = JSON.parse(localStorage.getItem(META_KEY) || '{"streak":0,"lastCompletedDate":"","sound":true,"dark":false,"asrMethod":"hanafi","hijriOffset":0}');
-    let user = JSON.parse(localStorage.getItem(USER_KEY) || "null");
-    let tasbih = JSON.parse(localStorage.getItem(TASBIH_KEY) || '{"dhikr":"সুবহানাল্লাহ","count":0,"target":33}');
-    let locData = JSON.parse(localStorage.getItem(LOC_KEY) || '{"lat":23.8103,"lng":90.4125,"label":"ঢাকা (ডিফল্ট)","live":false}');
-
-    const DUAS = [
-      {
-        title: "ঘর থেকে বের হওয়ার দোয়া",
-        arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
-        pronunciation: "বিসমিল্লাহি তাওয়াক্কালতু আলাল্লাহি ওয়া লা হাওলা ওয়া লা কুওয়াতা ইল্লা বিল্লাহ।",
-        meaning: "আল্লাহর নামে (বের হচ্ছি), আল্লাহর ওপর ভরসা করলাম; আল্লাহ ছাড়া কোনো ক্ষমতা ও শক্তি নেই।",
-        dhikrValue: "বিসমিল্লাহি তাওয়াক্কালতু আলাল্লাহ"
-      },
-      {
-        title: "সকাল-সন্ধ্যার ক্ষমা ও কল্যাণের দোয়া (সাইয়িদুল ইস্তিগফার-এর অংশ)",
-        arabic: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
-        pronunciation: "আস্তাগফিরুল্লাহাল আজিমাল্লাজি লা ইলাহা ইল্লা হুয়াল হাইয়্যুল কাইয়্যুমু ওয়া আতুবু ইলাইহি।",
-        meaning: "আমি ক্ষমা চাই মহান আল্লাহর কাছে, যিনি ছাড়া কোনো ইলাহ নেই; তিনি চিরঞ্জীব ও চিরপ্রতিষ্ঠিত, এবং আমি তাঁর কাছেই তাওবা করি।",
-        dhikrValue: "আস্তাগফিরুল্লাহ"
-      },
-      {
-        title: "রিজিক ও কল্যাণের দোয়া",
-        arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",
-        pronunciation: "আল্লাহুম্মা ইন্নি আসআলুকা ইলমান নাফিআঁও ওয়া রিজকান তাইয়্যিবান ওয়া আমালাম মুতাকাব্বালান।",
-        meaning: "হে আল্লাহ! আমি আপনার কাছে উপকারী জ্ঞান, পবিত্র রিজিক এবং কবুলযোগ্য আমল প্রার্থনা করছি।",
-        dhikrValue: "আলহামদুলিল্লাহ"
-      },
-      {
-        title: "ঘুমের আগে পড়ার দোয়া",
-        arabic: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
-        pronunciation: "বিসমিকা আল্লাহুম্মা আমুতু ওয়া আহইয়া।",
-        meaning: "হে আল্লাহ! আপনার নামেই আমি মৃত্যুবরণ করি (ঘুমাই) এবং আপনার নামেই জীবিত হই (জাগ্রত হই)।",
-        dhikrValue: "সুবহানাল্লাহ"
-      }
+    const DEFAULT_ITEMS = [
+      { id: "f1", title: "ফজর", sub: "২ রাকাত ফরজ", time: "05:00", cat: "নামায", done: false, jamat: true },
+      { id: "f2", title: "যোহর", sub: "৪ রাকাত ফরজ", time: "12:00", cat: "নামায", done: false, jamat: false },
+      { id: "f3", title: "আসর", sub: "৪ রাকাত ফরজ", time: "15:45", cat: "নামায", done: false, jamat: false },
+      { id: "f4", title: "মাগরিব", sub: "৩ রাকাত ফরজ", time: "17:15", cat: "নামায", done: false, jamat: false },
+      { id: "f5", title: "ইশা", sub: "৪ রাকাত ফরজ", time: "19:00", cat: "নামায", done: false, jamat: false },
+      { id: "n1", title: "তাহাজ্জুদ / ইশরাক / চাশত", sub: "নফল সালাত", time: "09:15", cat: "নফল নামায", done: false, jamat: false },
+      { id: "m1", title: "সকাল-সন্ধ্যার দোয়া ও তসবিহ", sub: "জিকির ও আজকার", time: "06:15", cat: "সকাল-সন্ধ্যার আমল", done: false, jamat: false },
+      { id: "s1", title: "ঘুমের আগের আমল", sub: "দোয়া ও আয়াতুল কুরসি", time: "22:30", cat: "ঘুমের আগের আমল", done: false, jamat: false },
+      { id: "w1", title: "দৈনন্দিন পড়াশোনা / কাজ", sub: "নির্ধারিত লক্ষ্য", time: "09:30", cat: "দৈনন্দিন কাজ", done: false, jamat: false }
     ];
 
-    let activeFilter = "সব";
-    let triggeredToday = new Set();
+    let items = JSON.parse(localStorage.getItem(KEY_ITEMS) || "null") || DEFAULT_ITEMS;
+    let state = JSON.parse(localStorage.getItem(KEY_STATE) || '{"userName":"","dark":false,"streak":0,"tasbihCount":0,"tasbihTarget":33,"dhikr":"সুবহানাল্লাহ"}');
+    let loc = JSON.parse(localStorage.getItem(KEY_LOC) || '{"lat":23.8103,"lng":90.4125,"label":"ঢাকা","live":false}');
 
-    const taskForm = document.getElementById("taskForm");
-    const taskTime = document.getElementById("taskTime");
-    const taskCategory = document.getElementById("taskCategory");
-    const taskTitle = document.getElementById("taskTitle");
-    const routineList = document.getElementById("routineList");
-    const progressText = document.getElementById("progressText");
-    const progressBar = document.getElementById("progressBar");
-    const streakCount = document.getElementById("streakCount");
-    const soundToggleBtn = document.getElementById("soundToggleBtn");
-    const themeToggleBtn = document.getElementById("themeToggleBtn");
-    const headerUserBadge = document.getElementById("headerUserBadge");
-    const asrMethodSelect = document.getElementById("asrMethodSelect");
-    const hijriOffsetSelect = document.getElementById("hijriOffsetSelect");
+    let activeCat = "সব";
 
-    function getFormattedDates() {
-      const now = new Date();
-      const gregorianText = now.toLocaleDateString("bn-BD", {
-        weekday: "long", year: "numeric", month: "long", day: "numeric"
-      });
-
-      let banglaText = "";
-      try {
-        banglaText = new Intl.DateTimeFormat("bn-BD-u-ca-bengali", {
-          day: "numeric", month: "long", year: "numeric"
-        }).format(now);
-      } catch (e) {
-        banglaText = "বাংলা ক্যালেন্ডার";
-      }
-
-      const adjustedDate = new Date(now.getTime() + (Number(meta.hijriOffset || 0) * 86400000));
-      let hijriText = "";
-      try {
-        hijriText = new Intl.DateTimeFormat("bn-BD-u-ca-islamic-civil", {
-          day: "numeric", month: "long", year: "numeric"
-        }).format(adjustedDate);
-      } catch (e) {
-        hijriText = "হিজরি ক্যালেন্ডার";
-      }
-
-      return { gregorianText, banglaText, hijriText };
-    }
-
-    function renderDates() {
-      const { gregorianText, banglaText, hijriText } = getFormattedDates();
-      document.getElementById("todayDate").textContent = `${gregorianText} • ${banglaText}`;
-      document.getElementById("banglaDatePill").textContent = `🗓️ বাংলা: ${banglaText}`;
-      document.getElementById("hijriDatePill").textContent = `🌙 হিজরি: ${hijriText}`;
-      const summaryEl = document.getElementById("prayerDatesSummary");
-      if (summaryEl) {
-        summaryEl.textContent = `🗓️ ${banglaText} | 🌙 ${hijriText}`;
-      }
-    }
-
-    // Menu Navigation
-    document.querySelectorAll(".nav-btn").forEach((btn) => {
+    // Bottom Navigation
+    document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active"));
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
         btn.classList.add("active");
-        document.getElementById(`view-${btn.dataset.view}`).classList.add("active");
+        document.getElementById(`panel-${btn.dataset.tab}`).classList.add("active");
       });
     });
 
-    // PWA Manifest & Install
-    const manifestData = {
-      name: "স্মার্ট দৈনিক রুটিন",
-      short_name: "দৈনিক রুটিন",
-      start_url: ".",
-      display: "standalone",
-      background_color: "#0f766e",
-      theme_color: "#0f766e",
-      icons: [{
-        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f766e'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white'%3E✓%3C/text%3E%3C/svg%3E",
-        sizes: "192x192",
-        type: "image/svg+xml"
-      }]
-    };
-    const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
-    document.getElementById("manifest-placeholder").setAttribute("href", URL.createObjectURL(manifestBlob));
-
-    let deferredPrompt;
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById("installBanner").style.display = "flex";
-    });
-
-    document.getElementById("installBtn").addEventListener("click", async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      document.getElementById("installBanner").style.display = "none";
-    });
-
-    // Solar Prayer Time Calculation
-    function degToRad(d) { return d * Math.PI / 180; }
-    function radToDeg(r) { return r * 180 / Math.PI; }
-    function fixHour(a) { return a - 24 * Math.floor(a / 24); }
-
-    function getDayOfYear(date) {
-      const start = new Date(date.getFullYear(), 0, 0);
-      return Math.floor((date - start) / 86400000);
-    }
-
-    function computePrayerTimes(date, lat, lng, tzOffsetHours, asrMethod) {
-      const n = getDayOfYear(date);
-      const g = degToRad(360 / 365.25 * n);
-      const decl = degToRad(
-        0.396372 - 22.91327 * Math.cos(g) + 4.02543 * Math.sin(g)
-        - 0.387205 * Math.cos(2 * g) + 0.051922 * Math.sin(2 * g)
-        - 0.154527 * Math.cos(3 * g) + 0.084798 * Math.sin(3 * g)
-      );
-
-      const eqTime = (
-        1.426 * Math.sin(g) - 0.375 * Math.sin(2 * g) - 0.089 * Math.sin(3 * g)
-        - 7.363 * Math.cos(g) - 9.924 * Math.cos(2 * g) - 0.333 * Math.cos(3 * g)
-      ) / 60;
-
-      const dhuhr = fixHour(12 + tzOffsetHours - (lng / 15) - eqTime);
-      const latRad = degToRad(lat);
-
-      function hourAngle(angleDeg) {
-        const cosH = (Math.sin(degToRad(angleDeg)) - Math.sin(latRad) * Math.sin(decl))
-          / (Math.cos(latRad) * Math.cos(decl));
-        return radToDeg(Math.acos(Math.max(-1, Math.min(1, cosH)))) / 15;
-      }
-
-      const fajr = fixHour(dhuhr - hourAngle(-18));
-      const sunrise = fixHour(dhuhr - hourAngle(-0.833));
-      const sunset = fixHour(dhuhr + hourAngle(-0.833));
-      const maghrib = fixHour(sunset + (3 / 60));
-      const isha = fixHour(dhuhr + hourAngle(-17));
-
-      const shadowFactor = asrMethod === "hanafi" ? 2 : 1;
-      const asrAltRad = Math.atan(1 / (shadowFactor + Math.tan(Math.abs(latRad - decl))));
-      const cosAsr = (Math.sin(asrAltRad) - Math.sin(latRad) * Math.sin(decl))
-        / (Math.cos(latRad) * Math.cos(decl));
-      const asr = fixHour(dhuhr + (radToDeg(Math.acos(Math.max(-1, Math.min(1, cosAsr)))) / 15));
-
-      return [
-        { key: "fajr", name: "ফজর", hours: fajr },
-        { key: "sunrise", name: "সূর্যোদয়", hours: sunrise },
-        { key: "dhuhr", name: "যোহর", hours: dhuhr },
-        { key: "asr", name: "আসর", hours: asr },
-        { key: "maghrib", name: "মাগরিব", hours: maghrib },
-        { key: "isha", name: "ইশা", hours: isha }
-      ];
-    }
-
-    function formatHoursTo12Bn(hFloat) {
-      const totalMins = Math.round(hFloat * 60) % 1440;
-      const h24 = Math.floor(totalMins / 60);
-      const min = totalMins % 60;
-      const period = h24 >= 12 ? "PM" : "AM";
-      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
-      return `${String(h12).padStart(2, "0")}:${String(min).padStart(2, "0")} ${period}`;
-    }
-
-    function renderPrayers() {
-      const now = new Date();
-      const tzHours = -now.getTimezoneOffset() / 60;
-      const nowHours = now.getHours() + now.getMinutes() / 60;
-      const list = computePrayerTimes(now, locData.lat, locData.lng, tzHours, meta.asrMethod || "hanafi");
-
-      const locText = `${locData.live ? "লাইভ" : "আনুমানিক"}: ${locData.label} (${locData.lat.toFixed(2)}°, ${locData.lng.toFixed(2)}°)`;
-      document.getElementById("locationDetailText").textContent = `📍 ${locText}`;
-      document.getElementById("routineLocChip").textContent = `📍 ${locData.label}`;
-
-      let currentWaqt = "ইশা / পরবর্তী দিন";
-      let nextWaqt = list[0];
-
-      for (let i = 0; i < list.length; i++) {
-        if (nowHours >= list[i].hours) {
-          currentWaqt = list[i].name;
-          nextWaqt = list[(i + 1) % list.length];
-        }
-      }
-
-      document.getElementById("currentWaqtName").textContent = currentWaqt;
-      document.getElementById("nextWaqtInfo").textContent = `${nextWaqt.name} • ${formatHoursTo12Bn(nextWaqt.hours)}`;
-      document.getElementById("routineNextPrayer").textContent = `🕌 পরবর্তী: ${nextWaqt.name} (${formatHoursTo12Bn(nextWaqt.hours)})`;
-
-      const grid = document.getElementById("prayerGrid");
-      grid.innerHTML = "";
-      list.forEach((item) => {
-        const div = document.createElement("div");
-        div.className = "waqt-item" + (item.name === currentWaqt ? " current" : "");
-        div.innerHTML = `
-          <span class="waqt-name">${item.name}</span>
-          <span class="waqt-time">${formatHoursTo12Bn(item.hours)}</span>
-        `;
-        grid.appendChild(div);
-      });
-    }
-
-    function renderDuas() {
-      const duaListEl = document.getElementById("duaList");
-      duaListEl.innerHTML = "";
-      DUAS.forEach((dua) => {
-        const card = document.createElement("div");
-        card.className = "dua-card";
-        card.innerHTML = `
-          <div class="dua-title">${dua.title}</div>
-          <div class="dua-arabic">${dua.arabic}</div>
-          <div class="dua-pron">${dua.pronunciation}</div>
-          <div class="dua-meaning">অর্থ: ${dua.meaning}</div>
-          <button type="button" class="btn-secondary">📿 তসবিহ কাউন্টারে পাঠান</button>
-        `;
-        card.querySelector("button").addEventListener("click", () => {
-          tasbih.dhikr = dua.dhikrValue;
-          if (!Array.from(dhikrSelect.options).some(o => o.value === dua.dhikrValue)) {
-            const opt = document.createElement("option");
-            opt.value = dua.dhikrValue;
-            opt.textContent = dua.dhikrValue;
-            dhikrSelect.appendChild(opt);
-          }
-          localStorage.setItem(TASBIH_KEY, JSON.stringify(tasbih));
-          renderTasbih();
-          document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.view === "tasbih"));
-          document.querySelectorAll(".view-section").forEach(v => v.classList.toggle("active", v.id === "view-tasbih"));
-        });
-        duaListEl.appendChild(card);
-      });
-    }
-
-    function fetchLiveLocation() {
-      if (!navigator.geolocation) {
-        renderPrayers();
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          locData = {
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
-            label: "বর্তমান অবস্থান",
-            live: true
-          };
-          localStorage.setItem(LOC_KEY, JSON.stringify(locData));
-          renderPrayers();
-        },
-        () => {
-          renderPrayers();
-        },
-        { timeout: 8000 }
-      );
-    }
-
-    document.getElementById("refreshLocBtn").addEventListener("click", fetchLiveLocation);
-
-    // Tasbih Logic
-    const dhikrSelect = document.getElementById("dhikrSelect");
-    const tasbihCountEl = document.getElementById("tasbihCount");
-    const tasbihTargetText = document.getElementById("tasbihTargetText");
-
-    function renderTasbih() {
-      if (tasbih.dhikr && !Array.from(dhikrSelect.options).some(o => o.value === tasbih.dhikr)) {
-        const opt = document.createElement("option");
-        opt.value = tasbih.dhikr;
-        opt.textContent = tasbih.dhikr;
-        dhikrSelect.appendChild(opt);
-      }
-      dhikrSelect.value = tasbih.dhikr || "সুবহানাল্লাহ";
-      tasbihCountEl.textContent = tasbih.count || 0;
-      tasbihTargetText.textContent = tasbih.target > 0 ? `টার্গেট: ${tasbih.target}` : "টার্গেট: আনলিমিটেড";
-    }
-
-    function saveTasbih() {
-      localStorage.setItem(TASBIH_KEY, JSON.stringify(tasbih));
-      renderTasbih();
-    }
-
-    dhikrSelect.addEventListener("change", () => {
-      tasbih.dhikr = dhikrSelect.value;
-      saveTasbih();
-    });
-
-    document.getElementById("tasbihTapBtn").addEventListener("click", () => {
-      tasbih.count = (tasbih.count || 0) + 1;
-      if (tasbih.target > 0 && tasbih.count > tasbih.target) {
-        tasbih.count = 1;
-      }
-      if (navigator.vibrate) navigator.vibrate(20);
-      saveTasbih();
-    });
-
-    document.querySelectorAll("[data-target]").forEach((btn) => {
+    // Sub-tabs inside "আমি"
+    document.querySelectorAll("[data-sub]").forEach(btn => {
       btn.addEventListener("click", () => {
-        tasbih.target = Number(btn.dataset.target);
-        if (tasbih.target > 0 && tasbih.count > tasbih.target) tasbih.count = 0;
-        saveTasbih();
-      });
-    });
-
-    document.getElementById("tasbihResetBtn").addEventListener("click", () => {
-      tasbih.count = 0;
-      saveTasbih();
-    });
-
-    // Theme & Sound & Hijri Offset
-    function applyTheme() {
-      document.body.classList.toggle("dark", Boolean(meta.dark));
-      themeToggleBtn.textContent = meta.dark ? "☀️ লাইট" : "🌙 ডার্ক";
-    }
-
-    themeToggleBtn.addEventListener("click", () => {
-      meta.dark = !meta.dark;
-      localStorage.setItem(META_KEY, JSON.stringify(meta));
-      applyTheme();
-    });
-
-    function playChime() {
-      if (!meta.sound) return;
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        [523.25, 659.25, 783.99].forEach((freq, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = "sine";
-          osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.18);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.18 + 0.5);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(ctx.currentTime + i * 0.18);
-          osc.stop(ctx.currentTime + i * 0.18 + 0.5);
+        document.querySelectorAll("[data-sub]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        ["tasbih", "prayer", "profile"].forEach(id => {
+          document.getElementById(`sub-${id}`).style.display = btn.dataset.sub === id ? "block" : "none";
         });
-      } catch (e) {}
-    }
-
-    function updateSoundBtn() {
-      soundToggleBtn.textContent = meta.sound ? "🔔 চালু" : "🔕 বন্ধ";
-    }
-
-    soundToggleBtn.addEventListener("click", () => {
-      meta.sound = !meta.sound;
-      localStorage.setItem(META_KEY, JSON.stringify(meta));
-      updateSoundBtn();
-      if (meta.sound) playChime();
-    });
-
-    asrMethodSelect.addEventListener("change", () => {
-      meta.asrMethod = asrMethodSelect.value;
-      localStorage.setItem(META_KEY, JSON.stringify(meta));
-      renderPrayers();
-    });
-
-    hijriOffsetSelect.addEventListener("change", () => {
-      meta.hijriOffset = Number(hijriOffsetSelect.value);
-      localStorage.setItem(META_KEY, JSON.stringify(meta));
-      renderDates();
-    });
-
-    // Account
-    function renderAccount() {
-      if (user && user.name) {
-        headerUserBadge.textContent = user.name;
-        document.getElementById("loggedOutBox").style.display = "none";
-        document.getElementById("loggedInBox").style.display = "block";
-        document.getElementById("profileName").textContent = user.name;
-        document.getElementById("profileEmail").textContent = user.email || "—";
-      } else {
-        headerUserBadge.textContent = "অতিথি";
-        document.getElementById("loggedOutBox").style.display = "block";
-        document.getElementById("loggedInBox").style.display = "none";
-      }
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nameVal = document.getElementById("loginName").value.trim();
-      const emailVal = document.getElementById("loginEmail").value.trim();
-      if (!nameVal || !emailVal) return;
-      user = { name: nameVal, email: emailVal };
-      localStorage.setItem(USER_KEY, JSON.stringify(user));
-      renderAccount();
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      user = null;
-      localStorage.removeItem(USER_KEY);
-      renderAccount();
-    });
-
-    // Routine
-    document.querySelectorAll(".filter-chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        activeFilter = chip.dataset.cat;
-        render();
       });
     });
 
-    function saveAll() {
-      tasks.sort((a, b) => a.time.localeCompare(b.time));
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const allDone = tasks.length > 0 && tasks.every(t => t.done);
-      if (allDone && meta.lastCompletedDate !== todayStr) {
-        meta.streak += 1;
-        meta.lastCompletedDate = todayStr;
-        localStorage.setItem(META_KEY, JSON.stringify(meta));
-      }
-      render();
-    }
-
-    function render() {
-      applyTheme();
-      updateSoundBtn();
-      renderDates();
-      renderAccount();
-      renderTasbih();
-      renderPrayers();
-      asrMethodSelect.value = meta.asrMethod || "hanafi";
-      hijriOffsetSelect.value = String(meta.hijriOffset ?? 0);
-      streakCount.textContent = `${meta.streak} দিন`;
-      routineList.innerHTML = "";
-
-      const visibleTasks = activeFilter === "সব"
-        ? tasks
-        : tasks.filter(t => (t.category || "ব্যক্তিগত") === activeFilter);
-
-      if (visibleTasks.length === 0) {
-        routineList.innerHTML = '<div class="empty">এই ক্যাটাগরিতে কোনো রুটিন নেই। নতুন কাজ যোগ করুন অথবা "নমুনা রুটিন" চাপুন।</div>';
-      } else {
-        visibleTasks.forEach((task) => {
-          const item = document.createElement("div");
-          item.className = "task-item" + (task.done ? " done" : "");
-          const cat = task.category || "ব্যক্তিগত";
-          item.innerHTML = `
-            <div class="task-left">
-              <input type="checkbox" ${task.done ? "checked" : ""} />
-              <span class="task-time">${task.time}</span>
-              <span class="cat-tag">${cat}</span>
-              <span class="task-title"></span>
-            </div>
-            <button type="button" class="btn-del" title="মুছুন">✕</button>
-          `;
-          item.querySelector(".task-title").textContent = task.title;
-          item.querySelector("input").addEventListener("change", () => {
-            task.done = !task.done;
-            saveAll();
-          });
-          item.querySelector(".btn-del").addEventListener("click", () => {
-            tasks = tasks.filter(t => t.id !== task.id);
-            saveAll();
-          });
-          routineList.appendChild(item);
-        });
-      }
-
-      const completed = tasks.filter(t => t.done).length;
-      const total = tasks.length;
-      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
-      progressText.textContent = `${completed} / ${total} সম্পন্ন (${percent}%)`;
-      progressBar.style.width = `${percent}%`;
-    }
-
-    taskForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!taskTime.value || !taskTitle.value.trim()) return;
-      tasks.push({
-        id: Date.now().toString(),
-        time: taskTime.value,
-        category: taskCategory.value,
-        title: taskTitle.value.trim(),
-        done: false
+    // Category Filter Pills
+    document.querySelectorAll("#todayCategoryPills .cat-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll("#todayCategoryPills .cat-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        activeCat = pill.dataset.cat;
+        renderToday();
       });
-      taskTitle.value = "";
-      saveAll();
     });
 
-    document.getElementById("resetChecksBtn").addEventListener("click", () => {
-      tasks = tasks.map(t => ({ ...t, done: false }));
-      triggeredToday.clear();
-      saveAll();
-    });
+    function saveData() {
+      localStorage.setItem(KEY_ITEMS, JSON.stringify(items));
+      localStorage.setItem(KEY_STATE, JSON.stringify(state));
+      renderAll();
+    }
 
-    document.getElementById("loadSampleBtn").addEventListener("click", () => {
-      tasks = [
-        { id: "1", time: "05:30", category: "স্বাস্থ্য", title: "ফজর ও দিনের শুরু", done: false },
-        { id: "2", time: "07:30", category: "ব্যক্তিগত", title: "সকালের নাস্তা ও প্রস্তুতি", done: false },
-        { id: "3", time: "09:00", category: "কাজ / অফিস", title: "মূল কাজ / ক্লাস বা দায়িত্ব পালন", done: false },
-        { id: "4", time: "14:00", category: "স্বাস্থ্য", title: "দুপুরের খাবার ও বিশ্রাম", done: false },
-        { id: "5", time: "19:30", category: "পড়াশোনা", title: "পড়াশোনা বা নতুন কিছু শেখা", done: false },
-        { id: "6", time: "22:30", category: "ব্যক্তিগত", title: "পরের দিনের প্রস্তুতি ও ঘুমানো", done: false }
-      ];
-      saveAll();
-    });
-
-    document.getElementById("exportBtn").addEventListener("click", () => {
-      const box = document.getElementById("backupBox");
-      box.value = JSON.stringify({ tasks, meta, user, tasbih });
-      box.select();
-    });
-
-    document.getElementById("importBtn").addEventListener("click", () => {
-      try {
-        const parsed = JSON.parse(document.getElementById("backupBox").value);
-        if (Array.isArray(parsed.tasks)) {
-          tasks = parsed.tasks;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-        }
-        if (parsed.meta) {
-          meta = { ...meta, ...parsed.meta };
-          localStorage.setItem(META_KEY, JSON.stringify(meta));
-        }
-        if (parsed.user) {
-          user = parsed.user;
-          localStorage.setItem(USER_KEY, JSON.stringify(user));
-        }
-        if (parsed.tasbih) {
-          tasbih = { ...tasbih, ...parsed.tasbih };
-          localStorage.setItem(TASBIH_KEY, JSON.stringify(tasbih));
-        }
-        render();
-      } catch (err) {}
-    });
-
-    document.getElementById("clearAllBtn").addEventListener("click", () => {
-      tasks = [];
-      meta = { streak: 0, lastCompletedDate: "", sound: true, dark: false, asrMethod: "hanafi", hijriOffset: 0 };
-      user = null;
-      tasbih = { dhikr: "সুবহানাল্লাহ", count: 0, target: 33 };
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(META_KEY);
-      localStorage.removeItem(USER_KEY);
-      localStorage.removeItem(TASBIH_KEY);
-      render();
-    });
-
-    document.getElementById("closeAlarmBtn").addEventListener("click", () => {
-      document.getElementById("alarmPopup").style.display = "none";
-    });
-
-    setInterval(() => {
-      renderDates();
-      renderPrayers();
+    function renderHeroDates() {
       const now = new Date();
-      const hh = String(now.getHours()).padStart(2, "0");
-      const mm = String(now.getMinutes()).padStart(2, "0");
-      const currentHHMM = `${hh}:${mm}`;
+      const dayName = now.toLocaleDateString("bn-BD", { weekday: "long" });
+      const greg = now.toLocaleDateString("bn-BD", { day: "numeric", month: "long" });
+      let hijri = "";
+      try {
+        hijri = new Intl.DateTimeFormat("bn-BD-u-ca-islamic-civil", {
+          day: "numeric", month: "long", year: "numeric"
+        }).format(now) + " হি.";
+      } catch (e) {
+        hijri = "হিজরি ক্যালেন্ডার";
+      }
 
-      tasks.forEach(task => {
-        const key = `${task.id}_${currentHHMM}`;
-        if (!task.done && task.time === currentHHMM && !triggeredToday.has(key)) {
-          triggeredToday.add(key);
-          playChime();
-          document.getElementById("alarmTaskName").textContent = `${task.time} — ${task.title}`;
-          document.getElementById("alarmPopup").style.display = "flex";
-        }
+      document.getElementById("heroDay").textContent = `আজ, ${dayName}`;
+      document.getElementById("heroGregorian").textContent = greg;
+      document.getElementById("heroHijri").textContent = hijri;
+
+      const weekNames = ["শনি", "রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র"];
+      const jsDay = now.getDay(); // 0=Sun..6=Sat
+      const satIndex = (jsDay + 1) % 7;
+      const strip = document.getElementById("weekStrip");
+      strip.innerHTML = "";
+      for (let i = 0; i < 7; i++) {
+        const diff = i - satIndex;
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+        const col = document.createElement("div");
+        col.innerHTML = `
+          <div class="week-day-name">${weekNames[i]}</div>
+          <div class="week-num ${diff === 0 ? "today" : ""}">${d.getDate().toLocaleString("bn-BD")}</div>
+        `;
+        strip.appendChild(col);
+      }
+
+      const cal = document.getElementById("monthCalendar");
+      cal.innerHTML = "";
+      const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+      const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const startOffset = (firstDay.getDay() + 1) % 7;
+
+      weekNames.forEach(w => {
+        const h = document.createElement("div");
+        h.style.fontSize = "0.78rem";
+        h.style.color = "var(--muted)";
+        h.style.fontWeight = "700";
+        h.textContent = w;
+        cal.appendChild(h);
       });
-    }, 15000);
 
-    renderDuas();
-    render();
-    fetchLiveLocation();
+      for (let b = 0; b < startOffset; b++) {
+        cal.appendChild(document.createElement("div"));
+      }
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("div");
+        cell.className = "cal-cell" + (day === now.getDate() ? " active-day" : "");
+        cell.textContent = day.toLocaleString("bn-BD");
+        cal.appendChild(cell);
+      }
+    }
+
+    function renderToday() {
+      const doneCount = items.filter(i => i.done).length;
+      const totalCount = items.length;
+      const pct = totalCount === 0 ? 0 : Math.round((doneCount / totalCount) * 100);
+
+      document.getElementById("heroPct").textContent = `${pct.toLocaleString("bn-BD")}%`;
+      document.getElementById("heroRatio").textContent = `${doneCount.toLocaleString("bn-BD")}/${totalCount.toLocaleString("bn-BD")}`;
+
+      document.getElementById("activeGroupTitle").textContent = activeCat === "সব" ? "আজকের আমল ও রুটিন" : activeCat;
+
+      const listEl = document.getElementById("todayTaskList");
+      listEl.innerHTML = "";
+      const filtered = activeCat === "সব" ? items : items.filter(i => i.cat === activeCat);
+
+      filtered.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "task-row";
+        row.innerHTML = `
+          <div>
+            <div style="font-weight:800; font-size:1rem;" class="${item.done ? "done-title" : ""}">${item.title}</div>
+            <div class="task-meta">
+              <span class="badge-soft">${item.cat}</span>
+              <span class="badge-soft">${item.time}</span>
+              ${item.sub ? `<span style="font-size:0.8rem; color:var(--muted);">${item.sub}</span>` : ""}
+              ${item.cat === "নামায" ? `<button type="button" class="jamat-pill ${item.jamat ? "active" : ""}">জামাতে ${item.jamat ? "✓" : ""}</button>` : ""}
+            </div>
+          </div>
+          <button type="button" class="check-circle ${item.done ? "done" : ""}">${item.done ? "✓" : ""}</button>
+        `;
+
+        row.querySelector(".check-circle").addEventListener("click", () => {
+          item.done = !item.done;
+          if (items.length > 0 && items.every(x => x.done)) {
+            state.streak = (state.streak || 0) + 1;
+          }
+          saveData();
+        });
+
+        const jamatBtn = row.querySelector(".jamat-pill");
+        if (jamatBtn) {
+          jamatBtn.addEventListener("click", () => {
+            item.jamat = !item.jamat;
+            saveData();
+          });
+        }
+
+        listEl.appendChild(row);
+      });
+    }
+
+    function renderProgress() {
+      const doneCount = items.filter(i => i.done).length;
+      const totalCount = items.length;
+      const pct = totalCount === 0 ? 0 : Math.round((doneCount / totalCount) * 100);
+      const jamatCount = items.filter(i => i.cat === "নামায" && i.done && i.jamat).length;
+
+      document.getElementById("statAvgPct").textContent = `${pct.toLocaleString("bn-BD")}%`;
+      document.getElementById("statCompletedItems").textContent = doneCount.toLocaleString("bn-BD");
+      document.getElementById("statStreak").textContent = `${(state.streak || 0).toLocaleString("bn-BD")} দিন`;
+      document.getElementById("statJamatCount").textContent = jamatCount.toLocaleString("bn-BD");
+
+      const fardEl = document.getElementById("fardProgressList");
+      fardEl.innerHTML = "";
+      items.filter(i => i.cat === "নামায").forEach(p => {
+        const w = p.done ? 100 : 0;
+        const div = document.createElement("div");
+        div.style.marginBottom = "12px";
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.92rem;">
+            <span>${p.title} (${p.time})</span>
+            <span>${p.done ? "১/১ • ১০০%" : "০/১ • ০%"}</span>
+          </div>
+          <div class="prog-track"><div class="prog-fill" style="width:${w}%"></div></div>
+          <div style="font-size:0.78rem; color:var(--muted);">জামাতে: ${p.jamat ? "হ্যাঁ" : "না"}</div>
+        `;
+        fardEl.appendChild(div);
+      });
+
+      const cats = ["নামায", "নফল নামায", "সকাল-সন্ধ্যার আমল", "ঘুমের আগের আমল", "দৈনন্দিন কাজ"];
+      const catEl = document.getElementById("categoryBreakdownList");
+      catEl.innerHTML = "";
+      cats.forEach(c => {
+        const group = items.filter(i => i.cat === c);
+        const cPct = group.length === 0 ? 0 : Math.round((group.filter(i => i.done).length / group.length) * 100);
+        const div = document.createElement("div");
+        div.style.marginBottom = "10px";
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.9rem;">
+            <span>${c}</span>
+            <span>${cPct.toLocaleString("bn-BD")}%</span>
+          </div>
+          <div class="prog-track"><div class="prog-fill" style="width:${cPct}%"></div></div>
+        `;
+        catEl.appendChild(div);
+      });
+    }
+
+    function renderMe() {
+      document.body.classList.toggle("dark", Boolean(state.dark));
+      document.getElementById("navMeLabel").textContent = state.userName ? state.userName : "আমি";
+      document.getElementById("userNameInput").value = state.userName || "";
+      document.getElementById("tasbihNum").textContent = (state.tasbihCount || 0).toLocaleString("bn-BD");
+      document.getElementById("dhikrChoice").value = state.dhikr || "সুবহানাল্লাহ";
+      document.getElementById("locStatusText").textContent = `📍 ${loc.label} (${loc.lat.toFixed(2)}°, ${loc.lng.toFixed(2)}°)`;
+
+      const pList = document.getElementById("prayerTimesList");
+      pList.innerHTML = "";
+      items.filter(i => i.cat === "নামায").forEach(p => {
+        const row = document.createElement("div");
+        row.className = "task-row";
+        row.innerHTML = `<strong>${p.title}</strong><span>${p.time}</span>`;
+        pList.appendChild(row);
+      });
+    }
+
+    function renderAll() {
+      renderHeroDates();
+      renderToday();
+      renderProgress();
+      renderMe();
+    }
+
+    document.getElementById("addTaskForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const title = document.getElementById("newTaskTitle").value.trim();
+      if (!title) return;
+      items.push({
+        id: Date.now().toString(),
+        title,
+        sub: "",
+        time: document.getElementById("newTaskTime").value || "08:00",
+        cat: document.getElementById("newTaskCat").value,
+        done: false,
+        jamat: false
+      });
+      document.getElementById("newTaskTitle").value = "";
+      saveData();
+    });
+
+    document.getElementById("sampleRoutineBtn").addEventListener("click", () => {
+      items = DEFAULT_ITEMS.map(d => ({ ...d, done: false }));
+      saveData();
+    });
+
+    document.getElementById("tasbihPlusBtn").addEventListener("click", () => {
+      state.tasbihCount = (state.tasbihCount || 0) + 1;
+      if (state.tasbihTarget && state.tasbihCount > state.tasbihTarget) state.tasbihCount = 1;
+      saveData();
+    });
+
+    document.getElementById("tasbihTarget33").addEventListener("click", () => { state.tasbihTarget = 33; saveData(); });
+    document.getElementById("tasbihTarget100").addEventListener("click", () => { state.tasbihTarget = 100; saveData(); });
+    document.getElementById("tasbihClearBtn").addEventListener("click", () => { state.tasbihCount = 0; saveData(); });
+    document.getElementById("dhikrChoice").addEventListener("change", e => { state.dhikr = e.target.value; saveData(); });
+
+    document.getElementById("saveUserBtn").addEventListener("click", () => {
+      state.userName = document.getElementById("userNameInput").value.trim();
+      saveData();
+    });
+
+    document.getElementById("darkModeBtn").addEventListener("click", () => {
+      state.dark = !state.dark;
+      saveData();
+    });
+
+    document.getElementById("resetDayChecksBtn").addEventListener("click", () => {
+      items = items.map(i => ({ ...i, done: false }));
+      saveData();
+    });
+
+    document.getElementById("wipeDataBtn").addEventListener("click", () => {
+      localStorage.removeItem(KEY_ITEMS);
+      localStorage.removeItem(KEY_STATE);
+      items = DEFAULT_ITEMS.map(d => ({ ...d }));
+      state = { userName: "", dark: false, streak: 0, tasbihCount: 0, tasbihTarget: 33, dhikr: "সুবহানাল্লাহ" };
+      renderAll();
+    });
+
+    document.getElementById("getLocBtn").addEventListener("click", () => {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(pos => {
+        loc = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: "লাইভ অবস্থান", live: true };
+        localStorage.setItem(KEY_LOC, JSON.stringify(loc));
+        renderMe();
+      });
+    });
+
+    renderAll();
   </script>
 </body>
 </html>
