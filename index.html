@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f766e" />
+  <meta name="description" content="প্রতিদিনের রুটিন, সময়সূচি, অ্যালার্ম, সেটিংস ও প্রোফাইল ম্যানেজ করার ফ্রি অ্যাপ।" />
   <title>স্মার্ট দৈনিক রুটিন</title>
   <link rel="manifest" id="manifest-placeholder" />
   <style>
@@ -45,55 +46,87 @@
     body {
       background: var(--bg);
       color: var(--text);
-      padding: 16px 12px 60px;
+      padding: 16px 12px 70px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
     .app {
-      max-width: 640px;
+      max-width: 660px;
       margin: 0 auto;
     }
 
     header {
       background: linear-gradient(135deg, #0f766e, #0d9488);
       color: #ffffff;
-      padding: 20px;
+      padding: 18px 20px;
       border-radius: 18px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       box-shadow: 0 10px 25px rgba(15, 118, 110, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
-    header h1 { font-size: 1.35rem; margin-bottom: 4px; }
-    header p { font-size: 0.88rem; opacity: 0.92; }
+    header h1 { font-size: 1.3rem; margin-bottom: 3px; }
+    header p { font-size: 0.85rem; opacity: 0.92; }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .btn-theme {
-      background: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 0.85rem;
+    .user-chip {
+      background: rgba(255, 255, 255, 0.18);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
     }
 
     .streak-badge {
       background: rgba(255, 255, 255, 0.2);
-      padding: 8px 14px;
+      padding: 7px 13px;
       border-radius: 12px;
       text-align: center;
     }
 
-    .streak-badge span { display: block; font-size: 1.15rem; font-weight: 800; }
-    .streak-badge small { font-size: 0.72rem; }
+    .streak-badge span { display: block; font-size: 1.1rem; font-weight: 800; }
+    .streak-badge small { font-size: 0.7rem; }
+
+    .nav-menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--card);
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    body.dark .nav-btn.active { color: #062825; }
+
+    .view-section { display: none; }
+    .view-section.active { display: block; }
 
     #installBanner {
       display: none;
@@ -108,7 +141,7 @@
       gap: 10px;
     }
 
-    .progress-box {
+    .card {
       background: var(--card);
       padding: 16px;
       border-radius: 16px;
@@ -151,6 +184,8 @@
 
     input[type="time"],
     input[type="text"],
+    input[type="email"],
+    textarea,
     select {
       padding: 11px;
       border: 1px solid var(--border);
@@ -159,26 +194,26 @@
       outline: none;
       background: var(--input-bg);
       color: var(--text);
+      width: 100%;
     }
 
-    input:focus, select:focus { border-color: var(--primary); }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
 
     button {
       border: none;
       border-radius: 10px;
-      padding: 11px 15px;
-      font-size: 0.9rem;
+      padding: 10px 14px;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s;
     }
-
-    button:active { opacity: 0.8; }
 
     .btn-add { background: var(--primary); color: #ffffff; }
     body.dark .btn-add { color: #062825; }
 
-    .btn-install { background: var(--accent); color: #1e293b; padding: 8px 14px; font-size: 0.85rem; }
+    .btn-install { background: var(--accent); color: #1e293b; padding: 8px 14px; font-size: 0.84rem; }
+
+    .btn-danger { background: var(--danger); color: #ffffff; }
 
     .filter-row {
       display: flex;
@@ -283,6 +318,21 @@
       font-size: 1rem;
     }
 
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .setting-row:last-child { border-bottom: none; }
+    .setting-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+    .setting-desc { font-size: 0.82rem; color: var(--muted); }
+
+    .stack { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+
     .empty {
       text-align: center;
       color: var(--muted);
@@ -330,7 +380,7 @@
         <p id="todayDate"></p>
       </div>
       <div class="header-right">
-        <button type="button" class="btn-theme" id="themeToggleBtn">🌙 ডার্ক</button>
+        <span class="user-chip" id="headerUserBadge">অতিথি</span>
         <div class="streak-badge">
           <span id="streakCount">০ দিন</span>
           <small>ধারাবাহিকতা</small>
@@ -338,43 +388,112 @@
       </div>
     </header>
 
-    <div class="progress-box">
-      <div class="progress-top">
-        <span>আজকের অগ্রগতি</span>
-        <span id="progressText">০ / ০ সম্পন্ন</span>
+    <nav class="nav-menu" aria-label="মূল মেনু">
+      <button type="button" class="nav-btn active" data-view="routine">📋 রুটিন</button>
+      <button type="button" class="nav-btn" data-view="settings">⚙️ সেটিংস</button>
+      <button type="button" class="nav-btn" data-view="account">👤 লগইন</button>
+    </nav>
+
+    <!-- View 1: Routine -->
+    <section class="view-section active" id="view-routine">
+      <div class="card">
+        <div class="progress-top">
+          <span>আজকের অগ্রগতি</span>
+          <span id="progressText">০ / ০ সম্পন্ন</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" id="progressBar"></div>
+        </div>
       </div>
-      <div class="bar-bg">
-        <div class="bar-fill" id="progressBar"></div>
+
+      <form class="form-card" id="taskForm">
+        <input type="time" id="taskTime" required />
+        <select id="taskCategory" aria-label="ক্যাটাগরি">
+          <option value="পড়াশোনা">📚 পড়াশোনা</option>
+          <option value="কাজ / অফিস">💼 কাজ / অফিস</option>
+          <option value="স্বাস্থ্য">🏃 স্বাস্থ্য</option>
+          <option value="ব্যক্তিগত">🌱 ব্যক্তিগত</option>
+        </select>
+        <input type="text" id="taskTitle" placeholder="কাজের নাম লিখুন..." required />
+        <button type="submit" class="btn-add">যোগ করুন</button>
+      </form>
+
+      <div class="filter-row" id="filterRow">
+        <button type="button" class="filter-chip active" data-cat="সব">সব</button>
+        <button type="button" class="filter-chip" data-cat="পড়াশোনা">📚 পড়াশোনা</button>
+        <button type="button" class="filter-chip" data-cat="কাজ / অফিস">💼 কাজ / অফিস</button>
+        <button type="button" class="filter-chip" data-cat="স্বাস্থ্য">🏃 স্বাস্থ্য</button>
+        <button type="button" class="filter-chip" data-cat="ব্যক্তিগত">🌱 ব্যক্তিগত</button>
       </div>
-    </div>
 
-    <form class="form-card" id="taskForm">
-      <input type="time" id="taskTime" required />
-      <select id="taskCategory" aria-label="ক্যাটাগরি">
-        <option value="পড়াশোনা">📚 পড়াশোনা</option>
-        <option value="কাজ / অফিস">💼 কাজ / অফিস</option>
-        <option value="স্বাস্থ্য">🏃 স্বাস্থ্য</option>
-        <option value="ব্যক্তিগত">🌱 ব্যক্তিগত</option>
-      </select>
-      <input type="text" id="taskTitle" placeholder="কাজের নাম লিখুন..." required />
-      <button type="submit" class="btn-add">যোগ করুন</button>
-    </form>
+      <div class="actions-row">
+        <button type="button" class="btn-secondary" id="resetChecksBtn">🔄 নতুন দিন শুরু</button>
+        <button type="button" class="btn-secondary" id="loadSampleBtn">📋 নমুনা রুটিন</button>
+      </div>
 
-    <div class="filter-row" id="filterRow">
-      <button type="button" class="filter-chip active" data-cat="সব">সব</button>
-      <button type="button" class="filter-chip" data-cat="পড়াশোনা">📚 পড়াশোনা</button>
-      <button type="button" class="filter-chip" data-cat="কাজ / অফিস">💼 কাজ / অফিস</button>
-      <button type="button" class="filter-chip" data-cat="স্বাস্থ্য">🏃 স্বাস্থ্য</button>
-      <button type="button" class="filter-chip" data-cat="ব্যক্তিগত">🌱 ব্যক্তিগত</button>
-    </div>
+      <div class="routine-list" id="routineList"></div>
+    </section>
 
-    <div class="actions-row">
-      <button type="button" class="btn-secondary" id="soundToggleBtn">🔔 অ্যালার্ম চালু</button>
-      <button type="button" class="btn-secondary" id="resetChecksBtn">🔄 নতুন দিন শুরু</button>
-      <button type="button" class="btn-secondary" id="loadSampleBtn">📋 নমুনা রুটিন</button>
-    </div>
+    <!-- View 2: Settings -->
+    <section class="view-section" id="view-settings">
+      <div class="card">
+        <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাপ সেটিংস</h2>
 
-    <div class="routine-list" id="routineList"></div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">ডার্ক মোড (Dark Mode)</div>
+            <div class="setting-desc">রাতের ব্যবহারের জন্য গাঢ় থিম চালু বা বন্ধ করুন</div>
+          </div>
+          <button type="button" class="btn-secondary" id="themeToggleBtn">🌙 ডার্ক</button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">রিমাইন্ডার অ্যালার্ম সাউন্ড</div>
+            <div class="setting-desc">নির্ধারিত সময়ে সতর্কবার্তা ও টোন বাজানো</div>
+          </div>
+          <button type="button" class="btn-secondary" id="soundToggleBtn">🔔 চালু</button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-title">রুটিন ব্যাকআপ (JSON)</div>
+            <div class="setting-desc">নিজের রুটিন কপি করে অন্য ডিভাইসে রিস্টোর করুন</div>
+          </div>
+          <button type="button" class="btn-secondary" id="exportBtn">📤 ব্যাকআপ কপি</button>
+        </div>
+
+        <div class="stack">
+          <textarea id="backupBox" rows="3" placeholder='ব্যাকআপ কোড এখানে দেখা যাবে অথবা রিস্টোর করার কোড পেস্ট করুন...'></textarea>
+          <div class="actions-row" style="margin-bottom:0;">
+            <button type="button" class="btn-secondary" id="importBtn">📥 রিস্টোর করুন</button>
+            <button type="button" class="btn-danger" id="clearAllBtn">🗑️ সব ডেটা মুছুন</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- View 3: Login / Account -->
+    <section class="view-section" id="view-account">
+      <div class="card" id="loggedOutBox">
+        <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাকাউন্টে লগইন করুন</h2>
+        <p class="setting-desc" style="margin-bottom:12px;">
+          আপনার নাম ও ইমেইল দিয়ে প্রোফাইল সেট করুন। তথ্যগুলো আপনার ডিভাইসের ব্রাউজারেই সংরক্ষিত থাকবে।
+        </p>
+        <form class="stack" id="loginForm">
+          <input type="text" id="loginName" placeholder="আপনার নাম লিখুন" required />
+          <input type="email" id="loginEmail" placeholder="ইমেইল ঠিকানা (যেমন: name@example.com)" required />
+          <button type="submit" class="btn-add">লগইন করুন</button>
+        </form>
+      </div>
+
+      <div class="card" id="loggedInBox" style="display:none;">
+        <h2 style="font-size:1.05rem; margin-bottom:6px;">প্রোফাইল তথ্য</h2>
+        <p style="margin-bottom:4px;"><strong>নাম:</strong> <span id="profileName"></span></p>
+        <p style="margin-bottom:14px;"><strong>ইমেইল:</strong> <span id="profileEmail"></span></p>
+        <button type="button" class="btn-danger" id="logoutBtn">লগআউট করুন</button>
+      </div>
+    </section>
   </div>
 
   <div id="alarmPopup">
@@ -386,11 +505,13 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "smart_routine_v3";
-    const META_KEY = "smart_routine_meta_v3";
+    const STORAGE_KEY = "smart_routine_tasks_v4";
+    const META_KEY = "smart_routine_meta_v4";
+    const USER_KEY = "smart_routine_user_v4";
 
     let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     let meta = JSON.parse(localStorage.getItem(META_KEY) || '{"streak": 0, "lastCompletedDate": "", "sound": true, "dark": false}');
+    let user = JSON.parse(localStorage.getItem(USER_KEY) || "null");
     let activeFilter = "সব";
     let triggeredToday = new Set();
 
@@ -404,12 +525,23 @@
     const streakCount = document.getElementById("streakCount");
     const soundToggleBtn = document.getElementById("soundToggleBtn");
     const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const headerUserBadge = document.getElementById("headerUserBadge");
 
     document.getElementById("todayDate").textContent = new Date().toLocaleDateString("bn-BD", {
       weekday: "long", year: "numeric", month: "long", day: "numeric"
     });
 
-    // PWA Manifest
+    // Menu Navigation
+    document.querySelectorAll(".nav-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".view-section").forEach(v => v.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(`view-${btn.dataset.view}`).classList.add("active");
+      });
+    });
+
+    // PWA Manifest & Install
     const manifestData = {
       name: "স্মার্ট দৈনিক রুটিন",
       short_name: "দৈনিক রুটিন",
@@ -472,7 +604,7 @@
     }
 
     function updateSoundBtn() {
-      soundToggleBtn.textContent = meta.sound ? "🔔 অ্যালার্ম চালু" : "🔕 অ্যালার্ম বন্ধ";
+      soundToggleBtn.textContent = meta.sound ? "🔔 চালু" : "🔕 বন্ধ";
     }
 
     soundToggleBtn.addEventListener("click", () => {
@@ -480,6 +612,36 @@
       localStorage.setItem(META_KEY, JSON.stringify(meta));
       updateSoundBtn();
       if (meta.sound) playChime();
+    });
+
+    function renderAccount() {
+      if (user && user.name) {
+        headerUserBadge.textContent = user.name;
+        document.getElementById("loggedOutBox").style.display = "none";
+        document.getElementById("loggedInBox").style.display = "block";
+        document.getElementById("profileName").textContent = user.name;
+        document.getElementById("profileEmail").textContent = user.email || "—";
+      } else {
+        headerUserBadge.textContent = "অতিথি";
+        document.getElementById("loggedOutBox").style.display = "block";
+        document.getElementById("loggedInBox").style.display = "none";
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nameVal = document.getElementById("loginName").value.trim();
+      const emailVal = document.getElementById("loginEmail").value.trim();
+      if (!nameVal || !emailVal) return;
+      user = { name: nameVal, email: emailVal };
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      renderAccount();
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      user = null;
+      localStorage.removeItem(USER_KEY);
+      renderAccount();
     });
 
     document.querySelectorAll(".filter-chip").forEach((chip) => {
@@ -508,6 +670,7 @@
     function render() {
       applyTheme();
       updateSoundBtn();
+      renderAccount();
       streakCount.textContent = `${meta.streak} দিন`;
       routineList.innerHTML = "";
 
@@ -581,6 +744,42 @@
         { id: "6", time: "22:30", category: "ব্যক্তিগত", title: "পরের দিনের প্রস্তুতি ও ঘুমানো", done: false }
       ];
       saveAll();
+    });
+
+    // Backup, Restore & Reset
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      const box = document.getElementById("backupBox");
+      box.value = JSON.stringify({ tasks, meta, user });
+      box.select();
+    });
+
+    document.getElementById("importBtn").addEventListener("click", () => {
+      try {
+        const parsed = JSON.parse(document.getElementById("backupBox").value);
+        if (Array.isArray(parsed.tasks)) {
+          tasks = parsed.tasks;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        }
+        if (parsed.meta) {
+          meta = { ...meta, ...parsed.meta };
+          localStorage.setItem(META_KEY, JSON.stringify(meta));
+        }
+        if (parsed.user) {
+          user = parsed.user;
+          localStorage.setItem(USER_KEY, JSON.stringify(user));
+        }
+        render();
+      } catch (err) {}
+    });
+
+    document.getElementById("clearAllBtn").addEventListener("click", () => {
+      tasks = [];
+      meta = { streak: 0, lastCompletedDate: "", sound: true, dark: false };
+      user = null;
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(META_KEY);
+      localStorage.removeItem(USER_KEY);
+      render();
     });
 
     document.getElementById("closeAlarmBtn").addEventListener("click", () => {
