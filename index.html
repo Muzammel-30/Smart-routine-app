@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>স্মার্ট দৈনিক রুটিন</title>
+  <link rel="manifest" id="manifest-placeholder" />
+  <style>
+    :root {
+      --bg: #f0fdfa;
+      --card: #ffffff;
+      --primary: #0f766e;
+      --primary-light: #ccfbf1;
+      --primary-dark: #115e59;
+      --text: #134e4a;
+      --muted: #5f7a78;
+      --border: #cbd5e1;
+      --danger: #e11d48;
+      --accent: #f59e0b;
+      --input-bg: #ffffff;
+    }
+
+    body.dark {
+      --bg: #0b1315;
+      --card: #132024;
+      --primary: #14b8a6;
+      --primary-light: #134e4a;
+      --primary-dark: #5eead4;
+      --text: #e6fffa;
+      --muted: #94a3b8;
+      --border: #243b42;
+      --danger: #fb7185;
+      --accent: #fbbf24;
+      --input-bg: #0f1a1d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding: 16px 12px 60px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .app {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f766e, #0d9488);
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 25px rgba(15, 118, 110, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header h1 { font-size: 1.35rem; margin-bottom: 4px; }
+    header p { font-size: 0.88rem; opacity: 0.92; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-theme {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .streak-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .streak-badge span { display: block; font-size: 1.15rem; font-weight: 800; }
+    .streak-badge small { font-size: 0.72rem; }
+
+    #installBanner {
+      display: none;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      color: #92400e;
+      padding: 12px 16px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-box {
+      background: var(--card);
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .bar-bg {
+      height: 12px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0d9488, var(--primary));
+      transition: width 0.3s ease;
+    }
+
+    .form-card {
+      background: var(--card);
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 112px 135px 1fr auto;
+      gap: 10px;
+    }
+
+    input[type="time"],
+    input[type="text"],
+    select {
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      outline: none;
+      background: var(--input-bg);
+      color: var(--text);
+    }
+
+    input:focus, select:focus { border-color: var(--primary); }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:active { opacity: 0.8; }
+
+    .btn-add { background: var(--primary); color: #ffffff; }
+    body.dark .btn-add { color: #062825; }
+
+    .btn-install { background: var(--accent); color: #1e293b; padding: 8px 14px; font-size: 0.85rem; }
+
+    .filter-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    body.dark .filter-chip.active { color: #062825; }
+
+    .actions-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.82rem;
+      padding: 8px 12px;
+    }
+
+    .routine-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .task-time {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 4px 8px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .cat-tag {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .task-title { font-size: 0.96rem; word-break: break-word; }
+    .done .task-title { text-decoration: line-through; color: var(--muted); }
+
+    .btn-del {
+      background: transparent;
+      color: var(--danger);
+      padding: 6px 8px;
+      font-size: 1rem;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 32px 16px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px dashed var(--border);
+    }
+
+    #alarmPopup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #115e59;
+      color: #ffffff;
+      padding: 16px 22px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      z-index: 999;
+      align-items: center;
+      gap: 14px;
+      width: 90%;
+      max-width: 420px;
+    }
+
+    @media (max-width: 580px) {
+      .form-card { grid-template-columns: 1fr 1fr; }
+      #taskTitle { grid-column: span 2; }
+      .btn-add { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div id="installBanner">
+      <span>📲 অ্যাপটি আপনার ডিভাইসে ইনস্টল করুন</span>
+      <button type="button" class="btn-install" id="installBtn">ইনস্টল করুন</button>
+    </div>
+
+    <header>
+      <div>
+        <h1>স্মার্ট দৈনিক রুটিন</h1>
+        <p id="todayDate"></p>
+      </div>
+      <div class="header-right">
+        <button type="button" class="btn-theme" id="themeToggleBtn">🌙 ডার্ক</button>
+        <div class="streak-badge">
+          <span id="streakCount">০ দিন</span>
+          <small>ধারাবাহিকতা</small>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress-box">
+      <div class="progress-top">
+        <span>আজকের অগ্রগতি</span>
+        <span id="progressText">০ / ০ সম্পন্ন</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+
+    <form class="form-card" id="taskForm">
+      <input type="time" id="taskTime" required />
+      <select id="taskCategory" aria-label="ক্যাটাগরি">
+        <option value="পড়াশোনা">📚 পড়াশোনা</option>
+        <option value="কাজ / অফিস">💼 কাজ / অফিস</option>
+        <option value="স্বাস্থ্য">🏃 স্বাস্থ্য</option>
+        <option value="ব্যক্তিগত">🌱 ব্যক্তিগত</option>
+      </select>
+      <input type="text" id="taskTitle" placeholder="কাজের নাম লিখুন..." required />
+      <button type="submit" class="btn-add">যোগ করুন</button>
+    </form>
+
+    <div class="filter-row" id="filterRow">
+      <button type="button" class="filter-chip active" data-cat="সব">সব</button>
+      <button type="button" class="filter-chip" data-cat="পড়াশোনা">📚 পড়াশোনা</button>
+      <button type="button" class="filter-chip" data-cat="কাজ / অফিস">💼 কাজ / অফিস</button>
+      <button type="button" class="filter-chip" data-cat="স্বাস্থ্য">🏃 স্বাস্থ্য</button>
+      <button type="button" class="filter-chip" data-cat="ব্যক্তিগত">🌱 ব্যক্তিগত</button>
+    </div>
+
+    <div class="actions-row">
+      <button type="button" class="btn-secondary" id="soundToggleBtn">🔔 অ্যালার্ম চালু</button>
+      <button type="button" class="btn-secondary" id="resetChecksBtn">🔄 নতুন দিন শুরু</button>
+      <button type="button" class="btn-secondary" id="loadSampleBtn">📋 নমুনা রুটিন</button>
+    </div>
+
+    <div class="routine-list" id="routineList"></div>
+  </div>
+
+  <div id="alarmPopup">
+    <div style="flex:1">
+      <strong style="display:block; font-size:0.85rem; opacity:0.85;">⏰ রুটিন রিমাইন্ডার</strong>
+      <span id="alarmTaskName" style="font-size:1.05rem; font-weight:700;"></span>
+    </div>
+    <button type="button" class="btn-install" id="closeAlarmBtn">ঠিক আছে</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "smart_routine_v3";
+    const META_KEY = "smart_routine_meta_v3";
+
+    let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    let meta = JSON.parse(localStorage.getItem(META_KEY) || '{"streak": 0, "lastCompletedDate": "", "sound": true, "dark": false}');
+    let activeFilter = "সব";
+    let triggeredToday = new Set();
+
+    const taskForm = document.getElementById("taskForm");
+    const taskTime = document.getElementById("taskTime");
+    const taskCategory = document.getElementById("taskCategory");
+    const taskTitle = document.getElementById("taskTitle");
+    const routineList = document.getElementById("routineList");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
+    const streakCount = document.getElementById("streakCount");
+    const soundToggleBtn = document.getElementById("soundToggleBtn");
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+
+    document.getElementById("todayDate").textContent = new Date().toLocaleDateString("bn-BD", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric"
+    });
+
+    // PWA Manifest
+    const manifestData = {
+      name: "স্মার্ট দৈনিক রুটিন",
+      short_name: "দৈনিক রুটিন",
+      start_url: ".",
+      display: "standalone",
+      background_color: "#0f766e",
+      theme_color: "#0f766e",
+      icons: [{
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f766e'/%3E%3Ctext x='50' y='66' font-size='52' text-anchor='middle' fill='white'%3E✓%3C/text%3E%3C/svg%3E",
+        sizes: "192x192",
+        type: "image/svg+xml"
+      }]
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: "application/json" });
+    document.getElementById("manifest-placeholder").setAttribute("href", URL.createObjectURL(manifestBlob));
+
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById("installBanner").style.display = "flex";
+    });
+
+    document.getElementById("installBtn").addEventListener("click", async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      document.getElementById("installBanner").style.display = "none";
+    });
+
+    function applyTheme() {
+      document.body.classList.toggle("dark", Boolean(meta.dark));
+      themeToggleBtn.textContent = meta.dark ? "☀️ লাইট" : "🌙 ডার্ক";
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      meta.dark = !meta.dark;
+      localStorage.setItem(META_KEY, JSON.stringify(meta));
+      applyTheme();
+    });
+
+    function playChime() {
+      if (!meta.sound) return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [523.25, 659.25, 783.99].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.18);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.18 + 0.5);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.18);
+          osc.stop(ctx.currentTime + i * 0.18 + 0.5);
+        });
+      } catch (e) {}
+    }
+
+    function updateSoundBtn() {
+      soundToggleBtn.textContent = meta.sound ? "🔔 অ্যালার্ম চালু" : "🔕 অ্যালার্ম বন্ধ";
+    }
+
+    soundToggleBtn.addEventListener("click", () => {
+      meta.sound = !meta.sound;
+      localStorage.setItem(META_KEY, JSON.stringify(meta));
+      updateSoundBtn();
+      if (meta.sound) playChime();
+    });
+
+    document.querySelectorAll(".filter-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeFilter = chip.dataset.cat;
+        render();
+      });
+    });
+
+    function saveAll() {
+      tasks.sort((a, b) => a.time.localeCompare(b.time));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const allDone = tasks.length > 0 && tasks.every(t => t.done);
+      if (allDone && meta.lastCompletedDate !== todayStr) {
+        meta.streak += 1;
+        meta.lastCompletedDate = todayStr;
+        localStorage.setItem(META_KEY, JSON.stringify(meta));
+      }
+      render();
+    }
+
+    function render() {
+      applyTheme();
+      updateSoundBtn();
+      streakCount.textContent = `${meta.streak} দিন`;
+      routineList.innerHTML = "";
+
+      const visibleTasks = activeFilter === "সব"
+        ? tasks
+        : tasks.filter(t => (t.category || "ব্যক্তিগত") === activeFilter);
+
+      if (visibleTasks.length === 0) {
+        routineList.innerHTML = '<div class="empty">এই ক্যাটাগরিতে কোনো রুটিন নেই। নতুন কাজ যোগ করুন অথবা "নমুনা রুটিন" চাপুন।</div>';
+      } else {
+        visibleTasks.forEach((task) => {
+          const item = document.createElement("div");
+          item.className = "task-item" + (task.done ? " done" : "");
+          const cat = task.category || "ব্যক্তিগত";
+          item.innerHTML = `
+            <div class="task-left">
+              <input type="checkbox" ${task.done ? "checked" : ""} />
+              <span class="task-time">${task.time}</span>
+              <span class="cat-tag">${cat}</span>
+              <span class="task-title"></span>
+            </div>
+            <button type="button" class="btn-del" title="মুছুন">✕</button>
+          `;
+          item.querySelector(".task-title").textContent = task.title;
+          item.querySelector("input").addEventListener("change", () => {
+            task.done = !task.done;
+            saveAll();
+          });
+          item.querySelector(".btn-del").addEventListener("click", () => {
+            tasks = tasks.filter(t => t.id !== task.id);
+            saveAll();
+          });
+          routineList.appendChild(item);
+        });
+      }
+
+      const completed = tasks.filter(t => t.done).length;
+      const total = tasks.length;
+      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+      progressText.textContent = `${completed} / ${total} সম্পন্ন (${percent}%)`;
+      progressBar.style.width = `${percent}%`;
+    }
+
+    taskForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!taskTime.value || !taskTitle.value.trim()) return;
+      tasks.push({
+        id: Date.now().toString(),
+        time: taskTime.value,
+        category: taskCategory.value,
+        title: taskTitle.value.trim(),
+        done: false
+      });
+      taskTitle.value = "";
+      saveAll();
+    });
+
+    document.getElementById("resetChecksBtn").addEventListener("click", () => {
+      tasks = tasks.map(t => ({ ...t, done: false }));
+      triggeredToday.clear();
+      saveAll();
+    });
+
+    document.getElementById("loadSampleBtn").addEventListener("click", () => {
+      tasks = [
+        { id: "1", time: "06:00", category: "স্বাস্থ্য", title: "ঘুম থেকে ওঠা, ফ্রেস হওয়া ও হাঁটা", done: false },
+        { id: "2", time: "07:30", category: "ব্যক্তিগত", title: "সকালের নাস্তা ও দিনের পরিকল্পনা", done: false },
+        { id: "3", time: "09:00", category: "কাজ / অফিস", title: "মূল কাজ / ক্লাস বা দায়িত্ব পালন", done: false },
+        { id: "4", time: "14:00", category: "স্বাস্থ্য", title: "দুপুরের খাবার ও বিশ্রাম", done: false },
+        { id: "5", time: "19:30", category: "পড়াশোনা", title: "পড়াশোনা বা নতুন কিছু শেখা", done: false },
+        { id: "6", time: "22:30", category: "ব্যক্তিগত", title: "পরের দিনের প্রস্তুতি ও ঘুমানো", done: false }
+      ];
+      saveAll();
+    });
+
+    document.getElementById("closeAlarmBtn").addEventListener("click", () => {
+      document.getElementById("alarmPopup").style.display = "none";
+    });
+
+    setInterval(() => {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, "0");
+      const mm = String(now.getMinutes()).padStart(2, "0");
+      const currentHHMM = `${hh}:${mm}`;
+
+      tasks.forEach(task => {
+        const key = `${task.id}_${currentHHMM}`;
+        if (!task.done && task.time === currentHHMM && !triggeredToday.has(key)) {
+          triggeredToday.add(key);
+          playChime();
+          document.getElementById("alarmTaskName").textContent = `${task.time} — ${task.title}`;
+          document.getElementById("alarmPopup").style.display = "flex";
+        }
+      });
+    }, 15000);
+
+    render();
+  </script>
+</body>
+</html>
