@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f766e" />
-  <meta name="description" content="প্রতিদিনের রুটিন, সময়সূচি, অ্যালার্ম, সেটিংস ও প্রোফাইল ম্যানেজ করার ফ্রি অ্যাপ।" />
-  <title>স্মার্ট দৈনিক রুটিন</title>
+  <meta name="description" content="প্রতিদিনের রুটিন, লাইভ লোকেশন অনুযায়ী নামাজের সময়, তসবিহ কাউন্টার ও সেটিংসসহ পূর্ণাঙ্গ অ্যাপ।" />
+  <title>স্মার্ট দৈনিক রুটিন ও আমল</title>
   <link rel="manifest" id="manifest-placeholder" />
   <style>
     :root {
@@ -46,12 +46,12 @@
     body {
       background: var(--bg);
       color: var(--text);
-      padding: 16px 12px 70px;
+      padding: 16px 12px 76px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
     .app {
-      max-width: 660px;
+      max-width: 680px;
       margin: 0 auto;
     }
 
@@ -69,37 +69,38 @@
       gap: 10px;
     }
 
-    header h1 { font-size: 1.3rem; margin-bottom: 3px; }
-    header p { font-size: 0.85rem; opacity: 0.92; }
+    header h1 { font-size: 1.28rem; margin-bottom: 3px; }
+    header p { font-size: 0.84rem; opacity: 0.92; }
 
     .header-right {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .user-chip {
+    .pill-badge {
       background: rgba(255, 255, 255, 0.18);
       padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
     }
 
     .streak-badge {
       background: rgba(255, 255, 255, 0.2);
-      padding: 7px 13px;
+      padding: 6px 12px;
       border-radius: 12px;
       text-align: center;
     }
 
-    .streak-badge span { display: block; font-size: 1.1rem; font-weight: 800; }
-    .streak-badge small { font-size: 0.7rem; }
+    .streak-badge span { display: block; font-size: 1.05rem; font-weight: 800; }
+    .streak-badge small { font-size: 0.68rem; }
 
     .nav-menu {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
       background: var(--card);
       padding: 6px;
       border-radius: 14px;
@@ -110,9 +111,9 @@
     .nav-btn {
       background: transparent;
       color: var(--text);
-      padding: 9px 10px;
+      padding: 8px 6px;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
@@ -148,6 +149,98 @@
       border: 1px solid var(--border);
       margin-bottom: 14px;
     }
+
+    .top-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .loc-chip {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .waqt-banner {
+      background: linear-gradient(135deg, #115e59, #0f766e);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 14px;
+    }
+
+    .waqt-banner-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .waqt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .waqt-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .waqt-item.current {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .waqt-name { font-weight: 700; font-size: 0.95rem; }
+    .waqt-time { font-weight: 800; font-size: 0.95rem; color: var(--primary-dark); }
+
+    .tasbih-box {
+      text-align: center;
+      padding: 10px 4px;
+    }
+
+    .tasbih-count {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 10px 0 6px;
+    }
+
+    .tasbih-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tasbih-big-btn {
+      width: 100%;
+      max-width: 280px;
+      padding: 16px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 16px;
+      background: var(--primary);
+      color: #ffffff;
+      margin: 0 auto 12px;
+      display: block;
+    }
+
+    body.dark .tasbih-big-btn { color: #062825; }
 
     .progress-top {
       display: flex;
@@ -210,9 +303,7 @@
 
     .btn-add { background: var(--primary); color: #ffffff; }
     body.dark .btn-add { color: #062825; }
-
     .btn-install { background: var(--accent); color: #1e293b; padding: 8px 14px; font-size: 0.84rem; }
-
     .btn-danger { background: var(--danger); color: #ffffff; }
 
     .filter-row {
@@ -246,6 +337,7 @@
       gap: 8px;
       margin-bottom: 14px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .btn-secondary {
@@ -330,7 +422,6 @@
     .setting-row:last-child { border-bottom: none; }
     .setting-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
     .setting-desc { font-size: 0.82rem; color: var(--muted); }
-
     .stack { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 
     .empty {
@@ -360,7 +451,9 @@
       max-width: 420px;
     }
 
-    @media (max-width: 580px) {
+    @media (max-width: 620px) {
+      .nav-menu { grid-template-columns: repeat(3, 1fr); }
+      .waqt-grid { grid-template-columns: 1fr; }
       .form-card { grid-template-columns: 1fr 1fr; }
       #taskTitle { grid-column: span 2; }
       .btn-add { grid-column: span 2; }
@@ -380,7 +473,7 @@
         <p id="todayDate"></p>
       </div>
       <div class="header-right">
-        <span class="user-chip" id="headerUserBadge">অতিথি</span>
+        <span class="pill-badge" id="headerUserBadge">অতিথি</span>
         <div class="streak-badge">
           <span id="streakCount">০ দিন</span>
           <small>ধারাবাহিকতা</small>
@@ -390,6 +483,8 @@
 
     <nav class="nav-menu" aria-label="মূল মেনু">
       <button type="button" class="nav-btn active" data-view="routine">📋 রুটিন</button>
+      <button type="button" class="nav-btn" data-view="prayer">🕌 নামাজ</button>
+      <button type="button" class="nav-btn" data-view="tasbih">📿 তসবিহ</button>
       <button type="button" class="nav-btn" data-view="settings">⚙️ সেটিংস</button>
       <button type="button" class="nav-btn" data-view="account">👤 লগইন</button>
     </nav>
@@ -397,6 +492,10 @@
     <!-- View 1: Routine -->
     <section class="view-section active" id="view-routine">
       <div class="card">
+        <div class="top-meta-bar">
+          <span class="loc-chip" id="routineLocChip">📍 লোকেশন লোড হচ্ছে...</span>
+          <span class="loc-chip" id="routineNextPrayer">🕌 পরবর্তী ওয়াক্ত হিসাব হচ্ছে...</span>
+        </div>
         <div class="progress-top">
           <span>আজকের অগ্রগতি</span>
           <span id="progressText">০ / ০ সম্পন্ন</span>
@@ -434,7 +533,57 @@
       <div class="routine-list" id="routineList"></div>
     </section>
 
-    <!-- View 2: Settings -->
+    <!-- View 2: Live Location & Prayer Times -->
+    <section class="view-section" id="view-prayer">
+      <div class="waqt-banner">
+        <div class="waqt-banner-top">
+          <div>
+            <small style="opacity:0.85;">বর্তমান ওয়াক্ত</small>
+            <h2 id="currentWaqtName" style="font-size:1.3rem;">হিসাব হচ্ছে...</h2>
+          </div>
+          <div style="text-align:right;">
+            <small style="opacity:0.85;">পরবর্তী ওয়াক্ত</small>
+            <div id="nextWaqtInfo" style="font-weight:700; font-size:0.95rem;">—</div>
+          </div>
+        </div>
+        <p id="locationDetailText" style="font-size:0.84rem; opacity:0.9;">📍 লাইভ লোকেশন নেওয়া হচ্ছে...</p>
+      </div>
+
+      <div class="card">
+        <div class="top-meta-bar">
+          <strong>আজকের নামাজের সময়সূচি</strong>
+          <button type="button" class="btn-secondary" id="refreshLocBtn">📍 লাইভ লোকেশন আপডেট</button>
+        </div>
+        <div class="waqt-grid" id="prayerGrid"></div>
+      </div>
+    </section>
+
+    <!-- View 3: Tasbih Counter -->
+    <section class="view-section" id="view-tasbih">
+      <div class="card tasbih-box">
+        <label for="dhikrSelect" style="font-weight:700; display:block; margin-bottom:8px;">জিকির নির্বাচন করুন</label>
+        <select id="dhikrSelect" style="max-width:340px; margin:0 auto 10px; display:block;">
+          <option value="সুবহানাল্লাহ">সুবহানাল্লাহ (سُبْحَانَ اللَّهِ)</option>
+          <option value="আলহামদুলিল্লাহ">আলহামদুলিল্লাহ (الْحَمْدُ لِلَّهِ)</option>
+          <option value="আল্লাহু আকবার">আল্লাহু আকবার (اللَّهُ أَكْبَرُ)</option>
+          <option value="আস্তাগফিরুল্লাহ">আস্তাগফিরুল্লাহ (أَسْتَغْفِرُ اللَّهَ)</option>
+        </select>
+
+        <div class="tasbih-count" id="tasbihCount">০</div>
+        <div class="tasbih-sub" id="tasbihTargetText">টার্গেট: ৩৩</div>
+
+        <button type="button" class="tasbih-big-btn" id="tasbihTapBtn">📿 গণনা করুন (+১)</button>
+
+        <div class="actions-row">
+          <button type="button" class="btn-secondary" data-target="33">টার্গেট ৩৩</button>
+          <button type="button" class="btn-secondary" data-target="100">টার্গেট ১০০</button>
+          <button type="button" class="btn-secondary" data-target="0">আনলিমিটেড</button>
+          <button type="button" class="btn-danger" id="tasbihResetBtn">🔄 রিসেট</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- View 4: Settings -->
     <section class="view-section" id="view-settings">
       <div class="card">
         <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাপ সেটিংস</h2>
@@ -457,6 +606,17 @@
 
         <div class="setting-row">
           <div>
+            <div class="setting-title">আসর ওয়াক্তের হিসাব পদ্ধতি</div>
+            <div class="setting-desc">হানাফি (ছায়া ২ গুণ) বা শাফিঈ/সর্বজনীন (ছায়া ১ গুণ)</div>
+          </div>
+          <select id="asrMethodSelect" style="max-width:170px;">
+            <option value="hanafi">হানাফি</option>
+            <option value="standard">শাফিঈ / সাধারণ</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div>
             <div class="setting-title">রুটিন ব্যাকআপ (JSON)</div>
             <div class="setting-desc">নিজের রুটিন কপি করে অন্য ডিভাইসে রিস্টোর করুন</div>
           </div>
@@ -464,8 +624,8 @@
         </div>
 
         <div class="stack">
-          <textarea id="backupBox" rows="3" placeholder='ব্যাকআপ কোড এখানে দেখা যাবে অথবা রিস্টোর করার কোড পেস্ট করুন...'></textarea>
-          <div class="actions-row" style="margin-bottom:0;">
+          <textarea id="backupBox" rows="3" placeholder="ব্যাকআপ কোড এখানে দেখা যাবে অথবা রিস্টোর করার কোড পেস্ট করুন..."></textarea>
+          <div class="actions-row" style="margin-bottom:0; justify-content:flex-start;">
             <button type="button" class="btn-secondary" id="importBtn">📥 রিস্টোর করুন</button>
             <button type="button" class="btn-danger" id="clearAllBtn">🗑️ সব ডেটা মুছুন</button>
           </div>
@@ -473,7 +633,7 @@
       </div>
     </section>
 
-    <!-- View 3: Login / Account -->
+    <!-- View 5: Login / Account -->
     <section class="view-section" id="view-account">
       <div class="card" id="loggedOutBox">
         <h2 style="font-size:1.05rem; margin-bottom:6px;">অ্যাকাউন্টে লগইন করুন</h2>
@@ -505,13 +665,18 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "smart_routine_tasks_v4";
-    const META_KEY = "smart_routine_meta_v4";
-    const USER_KEY = "smart_routine_user_v4";
+    const STORAGE_KEY = "smart_routine_tasks_v5";
+    const META_KEY = "smart_routine_meta_v5";
+    const USER_KEY = "smart_routine_user_v5";
+    const TASBIH_KEY = "smart_routine_tasbih_v5";
+    const LOC_KEY = "smart_routine_loc_v5";
 
     let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    let meta = JSON.parse(localStorage.getItem(META_KEY) || '{"streak": 0, "lastCompletedDate": "", "sound": true, "dark": false}');
+    let meta = JSON.parse(localStorage.getItem(META_KEY) || '{"streak":0,"lastCompletedDate":"","sound":true,"dark":false,"asrMethod":"hanafi"}');
     let user = JSON.parse(localStorage.getItem(USER_KEY) || "null");
+    let tasbih = JSON.parse(localStorage.getItem(TASBIH_KEY) || '{"dhikr":"সুবহানাল্লাহ","count":0,"target":33}');
+    let locData = JSON.parse(localStorage.getItem(LOC_KEY) || '{"lat":23.8103,"lng":90.4125,"label":"ঢাকা (ডিফল্ট)","live":false}');
+
     let activeFilter = "সব";
     let triggeredToday = new Set();
 
@@ -526,6 +691,7 @@
     const soundToggleBtn = document.getElementById("soundToggleBtn");
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const headerUserBadge = document.getElementById("headerUserBadge");
+    const asrMethodSelect = document.getElementById("asrMethodSelect");
 
     document.getElementById("todayDate").textContent = new Date().toLocaleDateString("bn-BD", {
       weekday: "long", year: "numeric", month: "long", day: "numeric"
@@ -573,6 +739,181 @@
       document.getElementById("installBanner").style.display = "none";
     });
 
+    // Astronomical Prayer Time Calculation (Solar equations in degrees)
+    function degToRad(d) { return d * Math.PI / 180; }
+    function radToDeg(r) { return r * 180 / Math.PI; }
+    function fixHour(a) { return a - 24 * Math.floor(a / 24); }
+
+    function getDayOfYear(date) {
+      const start = new Date(date.getFullYear(), 0, 0);
+      const diff = date - start;
+      return Math.floor(diff / 86400000);
+    }
+
+    function computePrayerTimes(date, lat, lng, tzOffsetHours, asrMethod) {
+      const n = getDayOfYear(date);
+      const g = degToRad(360 / 365.25 * n);
+      const decl = degToRad(
+        0.396372 - 22.91327 * Math.cos(g) + 4.02543 * Math.sin(g)
+        - 0.387205 * Math.cos(2 * g) + 0.051922 * Math.sin(2 * g)
+        - 0.154527 * Math.cos(3 * g) + 0.084798 * Math.sin(3 * g)
+      );
+
+      const eqTime = (
+        1.426 * Math.sin(g) - 0.375 * Math.sin(2 * g) - 0.089 * Math.sin(3 * g)
+        - 7.363 * Math.cos(g) - 9.924 * Math.cos(2 * g) - 0.333 * Math.cos(3 * g)
+      ) / 60; // hours
+
+      const dhuhr = fixHour(12 + tzOffsetHours - (lng / 15) - eqTime);
+      const latRad = degToRad(lat);
+
+      function hourAngle(angleDeg) {
+        const cosH = (Math.sin(degToRad(angleDeg)) - Math.sin(latRad) * Math.sin(decl))
+          / (Math.cos(latRad) * Math.cos(decl));
+        const clamped = Math.max(-1, Math.min(1, cosH));
+        return radToDeg(Math.acos(clamped)) / 15;
+      }
+
+      const fajr = fixHour(dhuhr - hourAngle(-18));
+      const sunrise = fixHour(dhuhr - hourAngle(-0.833));
+      const sunset = fixHour(dhuhr + hourAngle(-0.833));
+      const maghrib = fixHour(sunset + (3 / 60)); // 3 min safety buffer after sunset
+      const isha = fixHour(dhuhr + hourAngle(-17));
+
+      const shadowFactor = asrMethod === "hanafi" ? 2 : 1;
+      const asrAltRad = Math.atan(1 / (shadowFactor + Math.tan(Math.abs(latRad - decl))));
+      const cosAsr = (Math.sin(asrAltRad) - Math.sin(latRad) * Math.sin(decl))
+        / (Math.cos(latRad) * Math.cos(decl));
+      const asrH = radToDeg(Math.acos(Math.max(-1, Math.min(1, cosAsr)))) / 15;
+      const asr = fixHour(dhuhr + asrH);
+
+      return [
+        { key: "fajr", name: "ফজর", hours: fajr },
+        { key: "sunrise", name: "সূর্যোদয়", hours: sunrise },
+        { key: "dhuhr", name: "যোহর", hours: dhuhr },
+        { key: "asr", name: "আসর", hours: asr },
+        { key: "maghrib", name: "মাগরিব", hours: maghrib },
+        { key: "isha", name: "ইশা", hours: isha }
+      ];
+    }
+
+    function formatHoursTo12Bn(hFloat) {
+      const totalMins = Math.round(hFloat * 60) % 1440;
+      const h24 = Math.floor(totalMins / 60);
+      const min = totalMins % 60;
+      const period = h24 >= 12 ? "PM" : "AM";
+      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+      const hhStr = String(h12).padStart(2, "0");
+      const mmStr = String(min).padStart(2, "0");
+      return `${hhStr}:${mmStr} ${period}`;
+    }
+
+    function renderPrayers() {
+      const now = new Date();
+      const tzHours = -now.getTimezoneOffset() / 60;
+      const nowHours = now.getHours() + now.getMinutes() / 60;
+      const list = computePrayerTimes(now, locData.lat, locData.lng, tzHours, meta.asrMethod || "hanafi");
+
+      const locText = `${locData.live ? "লাইভ" : "আনুমানিক"}: ${locData.label} (${locData.lat.toFixed(2)}°, ${locData.lng.toFixed(2)}°)`;
+      document.getElementById("locationDetailText").textContent = `📍 ${locText}`;
+      document.getElementById("routineLocChip").textContent = `📍 ${locData.label}`;
+
+      let currentWaqt = "ইশা / পরবর্তী দিন";
+      let nextWaqt = list[0];
+
+      for (let i = 0; i < list.length; i++) {
+        if (nowHours >= list[i].hours) {
+          currentWaqt = list[i].name;
+          nextWaqt = list[(i + 1) % list.length];
+        }
+      }
+
+      document.getElementById("currentWaqtName").textContent = currentWaqt;
+      document.getElementById("nextWaqtInfo").textContent = `${nextWaqt.name} • ${formatHoursTo12Bn(nextWaqt.hours)}`;
+      document.getElementById("routineNextPrayer").textContent = `🕌 পরবর্তী: ${nextWaqt.name} (${formatHoursTo12Bn(nextWaqt.hours)})`;
+
+      const grid = document.getElementById("prayerGrid");
+      grid.innerHTML = "";
+      list.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "waqt-item" + (item.name === currentWaqt ? " current" : "");
+        div.innerHTML = `
+          <span class="waqt-name">${item.name}</span>
+          <span class="waqt-time">${formatHoursTo12Bn(item.hours)}</span>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function fetchLiveLocation() {
+      if (!navigator.geolocation) {
+        renderPrayers();
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          locData = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+            label: "বর্তমান অবস্থান",
+            live: true
+          };
+          localStorage.setItem(LOC_KEY, JSON.stringify(locData));
+          renderPrayers();
+        },
+        () => {
+          renderPrayers();
+        },
+        { timeout: 8000 }
+      );
+    }
+
+    document.getElementById("refreshLocBtn").addEventListener("click", fetchLiveLocation);
+
+    // Tasbih Logic
+    const dhikrSelect = document.getElementById("dhikrSelect");
+    const tasbihCountEl = document.getElementById("tasbihCount");
+    const tasbihTargetText = document.getElementById("tasbihTargetText");
+
+    function renderTasbih() {
+      dhikrSelect.value = tasbih.dhikr || "সুবহানাল্লাহ";
+      tasbihCountEl.textContent = tasbih.count || 0;
+      tasbihTargetText.textContent = tasbih.target > 0 ? `টার্গেট: ${tasbih.target}` : "টার্গেট: আনলিমিটেড";
+    }
+
+    function saveTasbih() {
+      localStorage.setItem(TASBIH_KEY, JSON.stringify(tasbih));
+      renderTasbih();
+    }
+
+    dhikrSelect.addEventListener("change", () => {
+      tasbih.dhikr = dhikrSelect.value;
+      saveTasbih();
+    });
+
+    document.getElementById("tasbihTapBtn").addEventListener("click", () => {
+      tasbih.count = (tasbih.count || 0) + 1;
+      if (tasbih.target > 0 && tasbih.count > tasbih.target) {
+        tasbih.count = 1;
+      }
+      if (navigator.vibrate) navigator.vibrate(20);
+      saveTasbih();
+    });
+
+    document.querySelectorAll("[data-target]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        tasbih.target = Number(btn.dataset.target);
+        if (tasbih.target > 0 && tasbih.count > tasbih.target) tasbih.count = 0;
+        saveTasbih();
+      });
+    });
+
+    document.getElementById("tasbihResetBtn").addEventListener("click", () => {
+      tasbih.count = 0;
+      saveTasbih();
+    });
+
+    // Theme & Sound
     function applyTheme() {
       document.body.classList.toggle("dark", Boolean(meta.dark));
       themeToggleBtn.textContent = meta.dark ? "☀️ লাইট" : "🌙 ডার্ক";
@@ -614,6 +955,13 @@
       if (meta.sound) playChime();
     });
 
+    asrMethodSelect.addEventListener("change", () => {
+      meta.asrMethod = asrMethodSelect.value;
+      localStorage.setItem(META_KEY, JSON.stringify(meta));
+      renderPrayers();
+    });
+
+    // Account
     function renderAccount() {
       if (user && user.name) {
         headerUserBadge.textContent = user.name;
@@ -644,6 +992,7 @@
       renderAccount();
     });
 
+    // Routine
     document.querySelectorAll(".filter-chip").forEach((chip) => {
       chip.addEventListener("click", () => {
         document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
@@ -671,6 +1020,9 @@
       applyTheme();
       updateSoundBtn();
       renderAccount();
+      renderTasbih();
+      renderPrayers();
+      asrMethodSelect.value = meta.asrMethod || "hanafi";
       streakCount.textContent = `${meta.streak} দিন`;
       routineList.innerHTML = "";
 
@@ -736,8 +1088,8 @@
 
     document.getElementById("loadSampleBtn").addEventListener("click", () => {
       tasks = [
-        { id: "1", time: "06:00", category: "স্বাস্থ্য", title: "ঘুম থেকে ওঠা, ফ্রেস হওয়া ও হাঁটা", done: false },
-        { id: "2", time: "07:30", category: "ব্যক্তিগত", title: "সকালের নাস্তা ও দিনের পরিকল্পনা", done: false },
+        { id: "1", time: "05:30", category: "স্বাস্থ্য", title: "ফজর ও দিনের শুরু", done: false },
+        { id: "2", time: "07:30", category: "ব্যক্তিগত", title: "সকালের নাস্তা ও প্রস্তুতি", done: false },
         { id: "3", time: "09:00", category: "কাজ / অফিস", title: "মূল কাজ / ক্লাস বা দায়িত্ব পালন", done: false },
         { id: "4", time: "14:00", category: "স্বাস্থ্য", title: "দুপুরের খাবার ও বিশ্রাম", done: false },
         { id: "5", time: "19:30", category: "পড়াশোনা", title: "পড়াশোনা বা নতুন কিছু শেখা", done: false },
@@ -746,10 +1098,9 @@
       saveAll();
     });
 
-    // Backup, Restore & Reset
     document.getElementById("exportBtn").addEventListener("click", () => {
       const box = document.getElementById("backupBox");
-      box.value = JSON.stringify({ tasks, meta, user });
+      box.value = JSON.stringify({ tasks, meta, user, tasbih });
       box.select();
     });
 
@@ -768,17 +1119,23 @@
           user = parsed.user;
           localStorage.setItem(USER_KEY, JSON.stringify(user));
         }
+        if (parsed.tasbih) {
+          tasbih = { ...tasbih, ...parsed.tasbih };
+          localStorage.setItem(TASBIH_KEY, JSON.stringify(tasbih));
+        }
         render();
       } catch (err) {}
     });
 
     document.getElementById("clearAllBtn").addEventListener("click", () => {
       tasks = [];
-      meta = { streak: 0, lastCompletedDate: "", sound: true, dark: false };
+      meta = { streak: 0, lastCompletedDate: "", sound: true, dark: false, asrMethod: "hanafi" };
       user = null;
+      tasbih = { dhikr: "সুবহানাল্লাহ", count: 0, target: 33 };
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(META_KEY);
       localStorage.removeItem(USER_KEY);
+      localStorage.removeItem(TASBIH_KEY);
       render();
     });
 
@@ -787,6 +1144,7 @@
     });
 
     setInterval(() => {
+      renderPrayers();
       const now = new Date();
       const hh = String(now.getHours()).padStart(2, "0");
       const mm = String(now.getMinutes()).padStart(2, "0");
@@ -804,6 +1162,7 @@
     }, 15000);
 
     render();
+    fetchLiveLocation();
   </script>
 </body>
 </html>
